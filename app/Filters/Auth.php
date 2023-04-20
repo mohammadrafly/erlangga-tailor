@@ -25,8 +25,8 @@ class Auth implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        if (session()->get('isLoggedIn') && session()->get('role') == 'admin') {
-            return TRUE;
+        if (session()->get('isLoggedIn') === TRUE && session()->get('role') == 'admin') {
+            return true;
         } else {
             return redirect()->to('auth/sign-in')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
         }

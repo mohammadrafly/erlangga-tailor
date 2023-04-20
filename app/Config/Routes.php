@@ -42,6 +42,10 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes){
     $routes->get('orders', 'Home::order');
 });
 
+$routes->match(['POST', 'GET'], 'tanpa-desain', 'OrderController::tanpaDesain');
+$routes->match(['POST', 'GET'], 'dengan-desain', 'OrderController::denganDesain');
+$routes->match(['POST', 'GET'], 'perbaikan', 'OrderController::perbaikan');
+
 $routes->get('sign-out', 'AuthController::signOut');
 
 

@@ -9,13 +9,16 @@ class AuthController extends BaseController
 {
     private function setSession($data)
     {
-        return session()->set([
+        $dataUser = session()->set([
             'isLoggedIn' => TRUE,
             'id' => $data[0]['id'],
             'name' => $data[0]['name'],
             'email' => $data[0]['email'],
             'username' => $data[0]['username'],
+            'role' => $data[0]['role'],
         ]);
+
+        return $data;
     }
 
     public function signIn()

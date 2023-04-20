@@ -1,5 +1,28 @@
 const base_url = 'http://localhost:8080/';
 
+function toggleMenu() {
+    var menu = document.getElementById('mobile-menu');
+    if (menu.style.display === 'block') {
+        menu.style.display = 'none';
+    } else {
+        menu.style.display = 'block';
+    }
+}
+
+document.getElementById("nav-toggler").addEventListener("click", function() {
+    var navMenu = document.getElementById("nav-menu");
+    if (navMenu.style.display === "flex") {
+    navMenu.style.display = "none";
+    } else {
+    navMenu.style.display = "flex";
+    }
+});
+
+function toggleDropdown() {
+    var dropdownMenu = document.querySelector('.dropdown-menu');
+    dropdownMenu.classList.toggle('hidden');
+}
+
 function signOut() {
     Swal.fire({
         title: 'Are you sure?',

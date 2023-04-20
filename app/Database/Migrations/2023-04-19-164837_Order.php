@@ -20,9 +20,22 @@ class Order extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '255',
             ],
-            'type_order' => [
+            'pesanan' => [
+                'type' => 'ENUM("perbaikan","tanpa_desain", "dengan_desain")',
+                'default' => 'perbaikan',
+                'null' => false,
+            ],
+            'foto_kain' => [
                 'type' => 'VARCHAR',
-                'constraint' => '255',
+                'contraint' => '255'
+            ],
+            'pola_desain' => [
+                'type' => 'VARCHAR',
+                'constraint' => '255'
+            ],
+            'kategori' => [
+                'type' => 'INT',
+                'constraint' => '11'
             ],
             'created_at' => [
                 'type' => 'TIMESTAMP',

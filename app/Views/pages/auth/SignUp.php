@@ -12,6 +12,12 @@
                             <input class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 hover:bg-gray-200 hover:outline-gray-200 focus:ring focus:ring-blue-300 focus:outline-none" id="name" type="text" placeholder="Full name">
                         </div>
                         <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="fullname">
+                                Username
+                            </label>
+                            <input class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 hover:bg-gray-200 hover:outline-gray-200 focus:ring focus:ring-blue-300 focus:outline-none" id="username" type="text" placeholder="Username">
+                        </div>
+                        <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
                                 Email
                             </label>
@@ -37,9 +43,6 @@
                 </div>
                 <div class="text-center">
                     <span class="text-white">Already have an account?</span>
-                    <a href="<?= base_url('login') ?>" class="text-white hover:text-blue-400 font-bold">Sign in</a>
+                    <a href="<?= base_url('auth/sign-in') ?>" class="text-white hover:text-blue-400 font-bold">Sign in</a>
                 </div>
-<?= $this->endSection() ?>
-<?= $this->section('scripts') ?>
-<script src="<?= base_url('assets/js/Auth.js') ?>"></script>
 <?= $this->endSection() ?>

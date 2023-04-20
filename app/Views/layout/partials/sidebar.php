@@ -47,7 +47,7 @@
                     </h1>
                     <ul>
                         <li class="pb-2">
-                            <a href="<?= base_url('dashboard/logout') ?>" class="text-gray-300 text-lg font-bold inline-block rounded-lg px-4 py-4 hover:bg-red-700 cursor-pointer flex flex-row">
+                            <a href="javascript:void(0);" onclick="signOut()" class="text-gray-300 text-lg font-bold inline-block rounded-lg px-4 py-4 hover:bg-red-700 cursor-pointer flex flex-row">
                                 <svg class="w-6 h-6 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1012.728 0M12 3v9" />
                                 </svg>

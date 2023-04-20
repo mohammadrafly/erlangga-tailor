@@ -50,11 +50,26 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
                         </svg>
                     </a>
-                    <a class="mr-4" href="<?= base_url('login') ?>">
+                    <?php if (session()->get('isLoggedIn')): ?>
+                    <div class="relative">
+                        <button class="flex items-center justify-center h-8 w-8 bg-white text-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500" id="signInDropdown" type="button" aria-haspopup="true" aria-expanded="false" onclick="toggleDropdown()">
+                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10 dropdown-menu hidden" aria-labelledby="signInDropdown" role="menu">
+                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"><?= session()->get('name') ;?></a>
+                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" href="<?= base_url('profile') ?>" role="menuitem">Proflie</a>
+                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" href="javascript:void(0);" onclick="signOut()" role="menuitem">Keluar</a>
+                        </div>
+                    </div>
+                    <?php else: ?>
+                    <a class="mr-4" href="<?= base_url('auth/sign-in') ?>">
                         <svg class="h-8 w-8 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                     </a>
+                    <?php endif ?>
                 </div>
             </div>
         </header>
@@ -127,8 +142,6 @@
                             </div>
                         </div>
                         <div class="flex items-center">
-                            <svg class="h-8 w-8 text-gray-700 fill-current" viewBox="0 0 24 24"><path d="M13.277 14.985l-1.554 5.506c-.105.371-.468.646-.89.646-.424 0-.785-.275-.89-.646l-1.553-5.506c-.042-.15-.13-.286-.252-.39-.122-.103-.267-.166-.422-.179l-5.265-.482c-.395-.036-.723-.305-.807-.683s.066-.74.385-.908l4.347-2.407c.158-.088.26-.253.287-.435l.647-3.975c.059-.364.367-.628.726-.628.36 
-                            <div class="flex items-center">
                             <svg class="h-8 w-8 text-gray-700 fill-current" viewBox="0 0 24 24"><path d="M12 2c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10-4.477-10-10-10zm5 13h-3v3h-4v-3h-3v-4h3v-3h4v3h3v4z"/></svg>
                             <div class="ml-4">
                                 <h3 class="text-lg font-medium">Easy Returns</h3>
@@ -157,6 +170,8 @@
         </footer>
     </body>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="<?= base_url('assets/js/Main.js') ?>"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
             function toggleMenu() {
                 var menu = document.getElementById('mobile-menu');
@@ -175,5 +190,10 @@
                 navMenu.style.display = "flex";
                 }
             });
+
+            function toggleDropdown() {
+                var dropdownMenu = document.querySelector('.dropdown-menu');
+                dropdownMenu.classList.toggle('hidden');
+            }
     </script>
 </html>

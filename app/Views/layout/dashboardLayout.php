@@ -22,6 +22,8 @@
         </div>
     </body>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="<?= base_url('assets/js/Main.js') ?>"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
         $(document).ready(function() {
             var currentUrl = window.location.href;

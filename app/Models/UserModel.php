@@ -15,9 +15,11 @@ class UserModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'name',
+        'username',
         'email',
         'password',
+        'name',
+        'role'
     ];
 
     // Dates
@@ -43,4 +45,18 @@ class UserModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    function GetAllUserByRole($role) 
+    {
+        return $this->db->table('users')
+            ->where('role', $role)
+            ->get()->getResults();
+    }
+
+    function GetAdministrator()
+    {
+        return $this->db->table('users')
+            ->where('role', 'administrator')
+            ->get()->getResults();
+    }
 }

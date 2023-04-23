@@ -37,6 +37,16 @@
                             Order
                         </a>
                     </li>
+                    <li class="pb-3">
+                        <a href="<?= base_url('dashboard/categories') ?>" class="text-gray-300 hover:text-gray-600 text-lg font-bold inline-block rounded-lg px-4 py-4 hover:bg-white cursor-pointer flex flex-row">
+                            <svg class="w-6 h-6 mr-2"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z"/>  
+                                <path d="M19 9l-2 9a2 2.5 0 0 1 -2 2h-6a2 2.5 0 0 1 -2 -2l-2 -9Z" />  
+                                <path d="M7 9a5 5 0 0 1 10 0" />
+                            </svg>
+                            Categories
+                        </a>
+                    </li>
                 </ul>
                 <div class="mt-auto px-10 py-10">
                     <h1 class="font-bold text-md text-gray-300 mb-5">

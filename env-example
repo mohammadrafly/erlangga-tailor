@@ -33,7 +33,7 @@
  database.default.hostname = localhost
  database.default.database = erlangga_tailor
  database.default.username = root
- database.default.password = R4v14ever!
+ database.default.password = 
  database.default.DBDriver = MySQLi
  database.default.DBPrefix =
  database.default.port = 3306

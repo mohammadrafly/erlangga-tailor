@@ -22,7 +22,7 @@
         </div>
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <?= $this->renderSection('script-js') ?>
     <script src="<?= base_url('assets/js/Main.js') ?>"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="<?= base_url('assets/js/Auth.js') ?>"></script>
 </html>

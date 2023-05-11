@@ -15,8 +15,6 @@ class User extends Seeder
             'role'     => 'admin',
             'name'     => 'admin',
         ];
-
-        $this->db->query('INSERT INTO users (username, email, password, role, name) VALUES(:username:, :email:, :password:, :role:, :name:)', $data);
         $this->db->table('users')->insert($data);
     }
 }

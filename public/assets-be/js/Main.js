@@ -12,10 +12,8 @@ function update(id) {
             $('[name="id"]').val(respond.data.id);
             $('[name="name"]').val(respond.data.name);
             $('[name="role"]').val(respond.data.role);
-            $('[name="address"]').val(respond.data.address);
-            $('[name="phone_number"]').val(respond.data.phone_number);
             $('#myModal').modal('show');
-            $('.modal-title').text('Edit Pengguna'); 
+            $('.modal-title').text('Edit User'); 
 
             $('#password-input').hide();
             $('#username-input').hide();
@@ -38,9 +36,8 @@ function save() {
       data: $('#form').serialize(),
       dataType: 'JSON',
       success: (respond) => {
-        if (respond.status == TRUE) {
-            showAlert(respond.icon, respond.title, respond.text);
-            location.reload();
+        if (respond.status) {
+            showAlert(respond.icon, respond.title, respond.text)
         } else {
             showAlert(respond.icon, respond.title, respond.text);
         }
@@ -52,12 +49,15 @@ function save() {
 }
 
 function deleteData(id) {
+    
     Swal.fire({
-        title: 'Apakah kamu yakin?',
-        showDenyButton: true,
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Hapus',
-        denyButtonText: `Jangan dihapus`,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
@@ -66,7 +66,6 @@ function deleteData(id) {
                 dataType: 'JSON',
                 success: function (respond) {
                     showAlert(respond.icon, respond.title, respond.text);
-                    location.reload();
                 },
                 error: function (textStatus) {
                     showAlert('error', textStatus, 'Telah terjadi error');
@@ -78,8 +77,15 @@ function deleteData(id) {
       })
 }
 
-function showAlert(icon, title, text) {
-    Swal.fire(icon, title, text)
+function showAlert(icon, title, text, callback) {
+    Swal.fire({
+        icon: icon, 
+        title: title, 
+        text: text,
+        timer: 3000,
+        showCancelButton: false,
+        showConfirmButton: false
+    }).then(() => location.reload());
 }
 
 function signOut() {

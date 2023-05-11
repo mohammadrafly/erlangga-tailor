@@ -5,7 +5,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">Erlangga Tailor</div>
             </a>
 
             <!-- Divider -->
@@ -23,14 +23,15 @@
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('dashboard/users') ?>">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Data User</span></a>
+                    <span>Data Order</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('dashboard/categories') ?>">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Data Kategori</span></a>
+                <a class="nav-link" href="<?= base_url('dashboard/users') ?>">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Data User</span></a>
             </li>
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

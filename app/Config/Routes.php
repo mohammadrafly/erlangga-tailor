@@ -40,13 +40,6 @@ $routes->group('auth', function($routes) {
 $routes->group('dashboard', ['filter' => 'auth'], function ($routes){
     $routes->get('/', 'Home::dashboard');
 
-    //categories
-    $routes->group('categories', function($routes) {
-        $routes->match(['POST', 'GET'], '/', 'CategoriesController::index');
-        $routes->match(['POST', 'GET'], 'update/(:num)', 'CategoriesController::update/$1');
-        $routes->get('delete/(:num)', 'CategoriesController::delete/$1');
-    });
-
     //users
     $routes->group('users', function($routes) {
         $routes->match(['POST', 'GET'], '/', 'UsersController::index');

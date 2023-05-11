@@ -26,21 +26,21 @@ class UsersController extends BaseController
             'role' => $this->request->getPost('role'),
         ];
 
-        if ($model->like('username')->get()->getResultArray()) {
+        if ($model->where('username', $data['username'])->first()) {
             return $this->response->setJSON([
-                'status' => FALSE,
+                'status' => false,
                 'icon' => 'error',
-                'title' => 'Error',
-                'text' => 'Username telah dipakai',
+                'title' => 'Error!',
+                'text' => 'Username sudah terdaftar'
             ]);
         }
 
-        if ($model->like('email')->get()->getResultArray()) {
+        if ($model->where('email', $data['email'])->first()) {
             return $this->response->setJSON([
-                'status' => FALSE,
+                'status' => false,
                 'icon' => 'error',
-                'title' => 'Error',
-                'text' => 'Email telah dipakai',
+                'title' => 'Error!',
+                'text' => 'Email sudah terdaftar'
             ]);
         }
 
@@ -58,7 +58,7 @@ class UsersController extends BaseController
         $model = new UserModel();
         if ($this->request->getMethod(true) !== 'POST') {
             return $this->response->setJSON([
-                'content' => $model->where('id', $id)->first(),
+                'data' => $model->where('id', $id)->first(),
                 'status' => true
             ]);
         }

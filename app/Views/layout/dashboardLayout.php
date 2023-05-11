@@ -71,13 +71,11 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="<?= base_url('assets-be/js/Main.js') ?>"></script>
-    <script scr="<?= base_url('assets-be/js/User.js') ?>"></script>
     <script src="<?= base_url('assets-be/vendors/jquery/jquery.min.js') ?>"></script>
     <script src="<?= base_url('assets-be/vendors/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
     <script src="<?= base_url('assets-be/vendors/jquery-easing/jquery.easing.min.js') ?>"></script>
     <script src="<?= base_url('assets-be/js/sb-admin-2.min.js') ?>"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <?= $this->renderSection('script') ?>
 </body>
 
 </html>

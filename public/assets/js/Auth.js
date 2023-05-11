@@ -84,6 +84,68 @@ function handleSignUp() {
   }
 }
 
+function handleSignIn() {
+  const form = $("#SignIn");
+  const usernameInput = $('#username');
+  const passwordInput = $('#password');
+
+  const username = usernameInput.val();
+  const password = passwordInput.val();
+  
+  if (!username) {
+    showAlert('error', 'Input Invalid', 'Username/Email tidak boleh kosong');
+    return;
+  }
+  if (!password) {
+    showAlert('error', 'Input Invalid', 'Password tidak boleh kosong.');
+    return;
+  }
+  
+  form.submit(function(e) {
+    e.preventDefault();
+
+      signInUser(username, password)
+      .then(handleSignInResponse)
+      .catch(() => {
+        showAlert('error', 'Error!', 'Silahkan hubungi admin.');
+      });
+  });
+
+  function signInUser(username, password) {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        dataType: "JSON",
+        success: (response) => {
+          resolve(response);
+        },
+        error: (error) => {
+            reject(error);
+        }
+      });
+    });
+  }
+
+  function handleSignInResponse(response) {
+    if (response.status ) {
+      swal.fire({
+          icon: response.icon,
+          title: response.title,
+          text: response.text,
+          showCancelButton: false,
+          showConfirmButton: false,
+          timer: 3000
+      }).then (function() {
+        if (response.role == 'administrator') {
+          window.location.href = `${base_url}dashboard`;
+        } else {
+          window.location.href = `${base_url}`;
+        }
+      });
+    } else {
+      showAlert(response.icon. response.title, response.text);
+    }
+  }
+}
 $(document).ready(function() {
   $('#SignIn').submit(function(event) {
       event.preventDefault();
@@ -126,11 +188,11 @@ $(document).ready(function() {
                   }
                 });
               } else {
-                showAlert(response.icon. response.title, response.text);
+                showAlert(response.icon, response.title, response.text);
               }
           },
           error: function() {
-            showAlert(response.icon. response.title, response.text);
+            showAlert(response.icon, response.title, response.text);
           }
       });
 

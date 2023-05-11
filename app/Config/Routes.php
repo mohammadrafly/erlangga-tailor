@@ -39,13 +39,19 @@ $routes->group('auth', function($routes) {
 
 $routes->group('dashboard', ['filter' => 'auth'], function ($routes){
     $routes->get('/', 'Home::dashboard');
-    $routes->get('orders', 'Home::order');
 
     //categories
     $routes->group('categories', function($routes) {
         $routes->match(['POST', 'GET'], '/', 'CategoriesController::index');
         $routes->match(['POST', 'GET'], 'update/(:num)', 'CategoriesController::update/$1');
         $routes->get('delete/(:num)', 'CategoriesController::delete/$1');
+    });
+
+    //users
+    $routes->group('users', function($routes) {
+        $routes->match(['POST', 'GET'], '/', 'UsersController::index');
+        $routes->match(['POST', 'GET'], 'update/(:num)', 'UsersController::update/$1');
+        $routes->get('delete/(:num)', 'UsersController::delete/$1');
     });
 });
 

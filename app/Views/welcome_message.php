@@ -10,7 +10,7 @@
 
                 <div class="mt-16 grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                     <div class="bg-white rounded-lg shadow-md">
-                        <a href="<?= base_url('tanpa-desain') ?>">
+                        <a href="<?= session()->get('isLoggedIn') ? base_url('customer/tanpa-desain') : base_url('auth/sign-in') ?>">
                             <img class="rounded-t-lg" src="https://images.unsplash.com/photo-1521747116042-5a810fda9664" alt="product">
                             <div class="p-4">
                                 <h3 class="text-gray-700 font-medium">Order Tanpa Desain</h3>
@@ -18,7 +18,7 @@
                         </a>
                     </div>
                     <div class="bg-white rounded-lg shadow-md">
-                        <a href="<?= base_url('dengan-desain') ?>">
+                        <a href="<?= session()->get('isLoggedIn') ? base_url('customer/dengan-desain') : base_url('auth/sign-in') ?>">
                             <img class="rounded-t-lg" src="https://images.unsplash.com/photo-1521747116042-5a810fda9664" alt="product">
                             <div class="p-4">
                                 <h3 class="text-gray-700 font-medium">Order Dengan Desain</h3>
@@ -26,7 +26,7 @@
                         </a>
                     </div>
                     <div class="bg-white rounded-lg shadow-md">
-                        <a href="<?= base_url('perbaikan') ?>">
+                        <a href="<?= session()->get('isLoggedIn') ? base_url('customer/perbaikan') : base_url('auth/sign-in') ?>">
                             <img class="rounded-t-lg" src="https://images.unsplash.com/photo-1521747116042-5a810fda9664" alt="product">
                             <div class="p-4">
                                 <h3 class="text-gray-700 font-medium">Order Perbaikan</h3>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-                <div class="mt-16 bg-white rounded-lg shadow-md p-8">
+                <div class="mt-16 bg-white rounded-lg shadow-md p-8 mb-10">
                     <h2 class="text-2xl font-bold">Subscribe to Our Newsletter</h2>
                     <p class="mt-4 text-gray-500">Sign up to get exclusive offers and updates on new products.</p>
                     <form class="mt-6">

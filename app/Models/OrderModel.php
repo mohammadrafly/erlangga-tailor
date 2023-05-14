@@ -4,18 +4,30 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CategoriesModel extends Model
+class OrderModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'categories';
+    protected $table            = 'order';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'category_name'
+        'id_user',
+        'pesanan',
+        'foto_kain',
+        'pola_desain',
+        'kategori',
+        'jumlah',
+        'jenis_kelamin',
+        'ukuran',
+        'catatan',
+        'tanggal_selesai',
+        'bukti_pembayaran',
+        'harga',
+        'status_track',
+        'updated_at'
     ];
 
     // Dates
@@ -41,4 +53,17 @@ class CategoriesModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    function relationOrderAndUser()
+    {
+        return $this->db->table('order')
+                        ->select('
+                            order.*,
+                            users.alamat as alamat,
+                            users.name as name,
+                            users.nomor_hp as nomor_hp,
+                        ')
+                        ->join('users', 'order.id_user = users.id')
+                        ->get()->getResultArray();
+    }
 }

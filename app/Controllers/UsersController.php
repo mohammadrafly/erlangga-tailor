@@ -7,6 +7,42 @@ use App\Models\UserModel;
 
 class UsersController extends BaseController
 {
+    public function profile($username) 
+    {
+        $model = new UserModel();
+
+        $dataUser = $model->where('username', $username)->first();
+        if ($this->request->getMethod(true) !== 'POST') {
+            $data = [
+                'content' => $dataUser
+            ];
+            return view('pages/home/profile', $data);
+        }
+
+        $data = [
+            'name' => $this->request->getVar('name'),
+            'nomor_hp' => $this->request->getVar('nomor_hp'),
+            'alamat' => $this->request->getVar('alamat'),
+        ];
+
+        $id = $dataUser['id'];
+        if (!$model->update($id, $data)) {
+            return $this->response->setJSON([
+                'status' => false,
+                'icon' => 'error',
+                'title' => 'Error!',
+                'text' => 'Gagal update profile'
+            ]);   
+        }
+
+        return $this->response->setJSON([
+            'status' => true,
+            'icon' => 'success',
+            'title' => 'Success!',
+            'text' => 'Berhasil update profile'
+        ]); 
+    }
+
     public function index()
     {
         $model = new UserModel();
@@ -19,11 +55,11 @@ class UsersController extends BaseController
         }
 
         $data = [
-            'username' => $this->request->getPost('username'),
-            'email' => $this->request->getPost('email'),
-            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            'name' => $this->request->getPost('name'),
-            'role' => $this->request->getPost('role'),
+            'username' => $this->request->getVar('username'),
+            'email' => $this->request->getVar('email'),
+            'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+            'name' => $this->request->getVar('name'),
+            'role' => $this->request->getVar('role'),
         ];
 
         if ($model->where('username', $data['username'])->first()) {

@@ -7,11 +7,15 @@ $(document).ready(function() {
       const passwordInput = $('#password');
       const emailInput = $('#email');
       const nameInput = $('#name');
+      const phoneNumberInput = $('#nomor_hp');
+      const alamatInput = $('#alamat');
   
       const username = usernameInput.val();
       const password = passwordInput.val();
       const email = emailInput.val();
       const name = nameInput.val();
+      const nomor_hp = phoneNumberInput.val();
+      const alamat = alamatInput.val();
       const passwordConfirmation = passwordConfirmationInput.val();
 
       if (!email) {
@@ -34,6 +38,16 @@ $(document).ready(function() {
         return;
       }
 
+      if (!alamat) {
+        showAlert('error', 'Input Invalid', 'Alamat tidak boleh kosong');
+        return;
+      }
+
+      if (!nomor_hp) {
+        showAlert('error', 'Input Invalid', 'Nomor HP tidak boleh kosong');
+        return;
+      }
+
       if (password !== passwordConfirmation) {
         showAlert('error', 'Input Invalid', 'Password tidak sama.');
         return;
@@ -47,6 +61,8 @@ $(document).ready(function() {
             name,
             email,
             password, 
+            alamat,
+            nomor_hp
           },
           dataType: 'JSON',
           success: function(response) {
@@ -59,12 +75,7 @@ $(document).ready(function() {
                     showConfirmButton: false,
                     timer: 3000
                 }).then (function(response) {
-                  if (response.status) {
-                    showAlert(response.icon, response.title, response.text);
-                    setTimeout(() => {
-                      window.location.href = `${base_url}auth/sign-in`;
-                    }, 3000);
-                  }
+                  showAlert(response.icon, response.title, response.text);
                 });
               } else {
                 showAlert(response.icon, response.title, response.text);
@@ -103,24 +114,24 @@ $(document).ready(function() {
           data: { username, password },
           dataType: 'JSON',
           success: function(response) {
-              if (response.status) {
-                swal.fire({
-                    icon: response.icon,
-                    title: response.title,
-                    text: response.text,
-                    showCancelButton: false,
-                    showConfirmButton: false,
-                    timer: 3000
-                }).then (function(response) {
-                  if (response.role == 'admin') {
-                    window.location.href = `${base_url}dashboard`;
-                  } else {
-                    window.location.href = `${base_url}`;
-                  }
-                });
-              } else {
-                showAlert(response.icon, response.title, response.text);
-              }
+            if (response.status) {
+              swal.fire({
+                icon: response.icon,
+                title: response.title,
+                text: response.text,
+                showCancelButton: false,
+                showConfirmButton: false,
+                timer: 3000
+              }).then (function(response) {
+                if (response.role == 'admin') {
+                  window.location.href = `${base_url}dashboard`;
+                } else {
+                  window.location.href = `${base_url}`;
+                }
+              });
+            } else {
+              showAlert(response.icon, response.title, response.text);
+            }
           },
           error: function() {
             showAlert(response.icon, response.title, response.text);

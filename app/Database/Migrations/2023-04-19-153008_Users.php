@@ -32,6 +32,14 @@ class Users extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '255',
             ],
+            'alamat' => [
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+            ],
+            'nomor_hp' => [
+                'type' => 'VARCHAR',
+                'constraint' => '14',
+            ],
             'role' => [
                 'type' => 'ENUM("admin","customer")',
                 'default' => 'customer',

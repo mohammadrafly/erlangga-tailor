@@ -18,7 +18,7 @@ $routes->set404Override();
 // The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
 // where controller filters or CSRF protection are bypassed.
 // If you don't want to define all routes, please use the Auto Routing (Improved).
-// Set `$autoRoutesImproved` to true in `app/Config/Feature.php` and set the following to true.
+// Set `$autoRoutesImproved` to true in `app/Co nfig/Feature.php` and set the following to true.
 // $routes->setAutoRoute(false);
 
 /*
@@ -46,11 +46,22 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes){
         $routes->match(['POST', 'GET'], 'update/(:num)', 'UsersController::update/$1');
         $routes->get('delete/(:num)', 'UsersController::delete/$1');
     });
+
+    //orders
+    $routes->group('orders', function($routes) {
+        $routes->match(['POST', 'GET'], '/', 'OrderController::index');
+        $routes->match(['POST', 'GET'], 'update/(:num)', 'OrderController::update/$1');
+        $routes->get('delete/(:num)', 'OrderController::delete/$1');
+    });
 });
 
-$routes->match(['POST', 'GET'], 'tanpa-desain', 'OrderController::tanpaDesain');
-$routes->match(['POST', 'GET'], 'dengan-desain', 'OrderController::denganDesain');
-$routes->match(['POST', 'GET'], 'perbaikan', 'OrderController::perbaikan');
+$routes->group('customer', ['filter' => 'authCustomer'], function($routes) {
+    $routes->match(['POST', 'GET'], 'order', 'OrderController::myOrder');
+    $routes->match(['POST', 'GET'], 'tanpa-desain', 'OrderController::tanpaDesain');
+    $routes->match(['POST', 'GET'], 'tanpa-desain/bayar/(:num)', 'OrderController::tanpaDesainBayar/$1');
+    $routes->match(['POST', 'GET'], 'dengan-desain', 'OrderController::denganDesain');
+    $routes->match(['POST', 'GET'], 'perbaikan', 'OrderController::perbaikan');
+});
 
 $routes->get('sign-out', 'AuthController::signOut');
 

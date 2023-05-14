@@ -74,6 +74,8 @@ class AuthController extends BaseController
             'name',
             'email',
             'password',
+            'nomor_hp',
+            'alamat',
         ]);
         $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
         

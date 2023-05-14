@@ -19,7 +19,10 @@ class UserModel extends Model
         'email',
         'password',
         'name',
-        'role'
+        'role',
+        'alamat',
+        'nomor_hp',
+        'updated_at',
     ];
 
     // Dates
@@ -50,13 +53,13 @@ class UserModel extends Model
     {
         return $this->db->table('users')
             ->where('role', $role)
-            ->get()->getResults();
+            ->get()->getResultArray();
     }
 
     function GetAdministrator()
     {
         return $this->db->table('users')
             ->where('role', 'administrator')
-            ->get()->getResults();
+            ->get()->getResultArray();
     }
 }

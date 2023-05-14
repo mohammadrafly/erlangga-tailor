@@ -23,9 +23,4 @@ class Home extends BaseController
     {
         return view('pages/dashboard/index', ['title' => 'Dashboard']);
     }
-
-    public function order()
-    {
-        return view('pages/dashboard/orderDashboard');
-    }
 }

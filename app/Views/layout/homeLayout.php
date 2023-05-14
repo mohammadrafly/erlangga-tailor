@@ -6,6 +6,7 @@
     <meta name="description" content="The small framework with powerful features">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
     <script src="https://kit.fontawesome.com/8ef7ea110e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="<?= base_url('assets/output.css') ?>">
 
@@ -28,6 +29,7 @@
             display: flex;
         }
     </style>
+    <?= $this->renderSection('css') ?>
     <body>
         <?= $this->include('layout/partials/headerHome') ?>
         <div class="pt-10 container mx-auto">
@@ -37,7 +39,9 @@
         </div>
         <?= $this->include('layout/partials/footerHome') ?>
     </body>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="<?= base_url('assets/js/Main.js') ?>"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <?= $this->renderSection('script') ?>
 </html>

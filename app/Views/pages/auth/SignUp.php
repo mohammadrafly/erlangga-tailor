@@ -3,13 +3,18 @@
 <?= $this->section('content') ?>  
                 <div class="bg-white shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
                     <div class="text-3xl text-center font-semibold font-sans">Sign Up</div>
+                        <?php if (!empty(session()->getFlashdata('error'))) : ?>
+                            <div class="text-center font-thin inline-block bg-red-700 text-white rounded-lg">
+                            <?php echo session()->getFlashdata('error'); ?>
+                            </div>
+                        <?php endif; ?>
                     <p class="mb-6 font-thin text-center">Daftar untuk mendapatkan akun.</p>
                     <form id="SignUp">
                         <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="fullname">
-                                Full Name
+                                Nama Lengkap
                             </label>
-                            <input class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 hover:bg-gray-200 hover:outline-gray-200 focus:ring focus:ring-blue-300 focus:outline-none" id="name" type="text" placeholder="Full name">
+                            <input class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 hover:bg-gray-200 hover:outline-gray-200 focus:ring focus:ring-blue-300 focus:outline-none" id="name" type="text" placeholder="Nama Lengkap">
                         </div>
                         <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="fullname">
@@ -22,6 +27,18 @@
                                 Email
                             </label>
                             <input class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 hover:bg-gray-200 hover:outline-gray-200 focus:ring focus:ring-blue-300 focus:outline-none" id="email" type="text" placeholder="Email">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="fullname">
+                                Nomor HP
+                            </label>
+                            <input class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 hover:bg-gray-200 hover:outline-gray-200 focus:ring focus:ring-blue-300 focus:outline-none" id="nomor_hp" type="number" placeholder="Nomor HP">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="alamat">
+                                Alamat
+                            </label>
+                            <textarea class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 hover:bg-gray-200 hover:outline-gray-200 focus:ring focus:ring-blue-300 focus:outline-none" id="alamat" placeholder="Contoh: Utd Pmi Malang, Jl. Buring, Oro-oro Dowo, Kec. Klojen, Kota Malang, Jawa Timur 65119"></textarea>
                         </div>
                         <div class="mb-6">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="password">

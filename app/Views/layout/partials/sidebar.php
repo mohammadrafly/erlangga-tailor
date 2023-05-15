@@ -22,16 +22,31 @@
 
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('dashboard/orders') ?>">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-fw fa-shopping-cart"></i>
                     <span>Data Order</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('dashboard/users') ?>">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-fw fa-users"></i>
                     <span>Data User</span></a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('dashboard/collections') ?>">
+                    <i class="fas fa-fw fa-tags"></i>
+                    <span>Data Collection</span></a>
+            </li>
+
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('dashboard/setting') ?>">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Setting</span></a>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

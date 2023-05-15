@@ -32,6 +32,7 @@ class Order extends Migration
             'pola_desain' => [
                 'type' => 'VARCHAR',
                 'constraint' => '255',
+                'null' => true,
             ],
             'kategori' => [
                 'type' => 'VARCHAR',
@@ -49,6 +50,7 @@ class Order extends Migration
             'ukuran' => [
                 'type' => 'VARCHAR',
                 'constraint' => '255',
+                'null' => true,
             ],
             'catatan' => [
                 'type' => 'TEXT', 
@@ -58,18 +60,17 @@ class Order extends Migration
                 'constraint' => '255',
                 'default' => null,
             ],
-            'bukti_pembayaran' => [
-                'type' => 'VARCHAR',
-                'constraint' => '255',
-                'default' => null,
-            ],
             'harga' => [
                 'type' => 'VARCHAR',
                 'constraint' => '255',
                 'default' => null,
             ],
+            'kode_pembayaran' => [
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+            ],  
             'status_track' => [
-                'type' => "ENUM('pending','ditolak', 'diterima', 'sudah_sampai', 'diproses', 'sudah_jadi', 'belum_lunas', 'lunas', 'dikirim', 'selesai')",
+                'type' => "ENUM('pending','dibatalkan', 'diterima', 'sudah_sampai', 'diproses', 'sudah_jadi', 'belum_lunas', 'lunas', 'dikirim', 'selesai')",
                 'default' => 'pending',
                 'null' => false,
             ],

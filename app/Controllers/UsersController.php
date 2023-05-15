@@ -7,11 +7,11 @@ use App\Models\UserModel;
 
 class UsersController extends BaseController
 {
-    public function profile($username) 
+    public function myProfile() 
     {
         $model = new UserModel();
 
-        $dataUser = $model->where('username', $username)->first();
+        $dataUser = $model->where('username', session()->get('username'))->first();
         if ($this->request->getMethod(true) !== 'POST') {
             $data = [
                 'content' => $dataUser

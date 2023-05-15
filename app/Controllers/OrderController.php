@@ -3,9 +3,8 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Database\Migrations\Order;
+use App\Models\CollectionModel;
 use App\Models\OrderModel;
-use App\Models\UserModel;
 
 class OrderController extends BaseController
 {
@@ -24,29 +23,6 @@ class OrderController extends BaseController
             //returning view from Folder Views/pages/dashboard
             return view('pages/dashboard/orderDashboard', $data);
         }
-        
-        //taking raw input from ajax request
-        $data = $this->request->getRawInput();
-        //decoding json input/raw input
-        $data = json_decode(file_get_contents('php://input'), true);
-
-        //if failed inserting data
-        if (!$model->insert($data)) {
-            return $this->response->setJSON([
-                'status' => false,
-                'icon' => 'error',
-                'title' => 'Error!',
-                'text' => 'Gagal tambah order',
-            ]);
-        }
-
-        //else insert data success
-        return $this->response->setJSON([
-            'status' => true,
-            'icon' => 'success',
-            'title' => 'Success!',
-            'text' => 'Berhasil tambah order',
-        ]);
     }
 
     public function update($id = null)
@@ -57,8 +33,11 @@ class OrderController extends BaseController
             return $this->response->setJSON($model->find($id));
         }
 
-        $data = $this->request->getRawInput();
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = [
+            'tanggal_selesai' => $this->request->getVar('tanggal_selesai'),
+            'harga' => $this->request->getVar('harga'),
+            'status_track' => $this->request->getVar('status_track'),
+        ];
 
         if (!$model->update($id, $data)) {
             return $this->response->setJSON([
@@ -89,30 +68,56 @@ class OrderController extends BaseController
         ]);
     }
 
-    public function tanpaDesainBayar($id)
+    private function read_file($file_path) {
+        $file_contents = file_get_contents($file_path);
+        return $file_contents;
+    }
+
+    public function myOrder() 
     {
+        helper('number');
         $model = new OrderModel();
+        $json_file_path = WRITEPATH . 'data-toko.json';
+        $json_data = $this->read_file($json_file_path);
         if ($this->request->getMethod(true) !== 'POST') {
             $data = [
-                'content' => $model->where('id', $id)->first()
+                'content' => $model->where('id_user', session()->get('id'))->findAll(),
+                'toko' => json_decode($json_data, true),
             ];
-            return view('pages/home/orderBayar', $data);
+            return view('pages/home/order', $data);
         }
 
-        $bukti_pembayaran = $this->request->getFile('bukti_pembayaran');
+        $id = $this->request->getVar('id[]');
 
-            if ($bukti_pembayaran->isValid() && !$bukti_pembayaran->hasMoved()) {
-                $bukti_pembayaranNew = $bukti_pembayaran->getRandomName();
-                $bukti_pembayaran->move('./uploads/bukti_pembayaran', $bukti_pembayaranNew);
-    
-                $data = [
-                    'bukti_pembayaran' => $bukti_pembayaranNew,
-                    'status_track' => 'lunas'
-                ];
-    
-                $model->update($id,$data);
-                return redirect()->to('customer/tanpa-desain')->with('success', 'Berhasil melakukan pembayaran');
-            }
+        if (!$id) {
+            return redirect()->to('customer/order')->with('error', 'pilih salah satu item untuk di checkout');
+        }
+
+        $data = array();
+        $kode = $this->generate_code();
+        for ($i = 0; $i < count($id); $i++) {
+            $data[] = array(
+                'id' => $id[$i],
+                'kode_pembayaran' => $kode,
+                'updated_at' => date('Y-m-d H:i:s')
+            );
+        }
+        $model->updateBatch($data, 'id');
+        $dts = [
+            'kode_pembayaran' => $kode,
+            'toko' => json_decode($json_data, true),
+        ];
+        return view('pages/partials/successCheckout', $dts);
+    }
+
+    function generate_code() {
+        $length = 10;
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $random_string = '';
+        for ($i = 0; $i < $length; $i++) {
+            $random_string .= $characters[rand(0, strlen($characters) - 1)];
+        }
+        return $random_string;
     }
 
     public function tanpaDesain()
@@ -136,6 +141,7 @@ class OrderController extends BaseController
                 'pesanan' => 'tanpa_desain',
                 'status_track' => 'pending',
                 'id_user' => session()->get('id'),
+                'jenis_kelamin' => $this->request->getVar('jenis_kelamin'),
                 'kategori' => $this->request->getVar('kategori'),
                 'ukuran' => $this->request->getVar('ukuran'),
                 'catatan' => $this->request->getVar('catatan'),
@@ -149,42 +155,39 @@ class OrderController extends BaseController
         }
     }    
 
-    public function myOrder() 
-    {
-        helper('number');
-        $model = new OrderModel();
-        $data = [
-            'content' => $model->where('id_user', session()->get('id'))->findAll(),
-        ];
-        return view('pages/home/order', $data);
-    }
-
     public function denganDesain()
     {
         $model = new OrderModel();
+        $modelCollection = new CollectionModel();
         if ($this->request->getMethod(true) !== 'POST') {
-            return view('pages/home/orderDenganDesain');
+            $data = [
+                'items' => $modelCollection->where('kategori', 'clothing')->findAll(),
+            ];
+            return view('pages/home/orderDenganDesain',$data);
         }
 
-        $data = $this->request->getRawInput();
-        $data = json_decode(file_get_contents('php://input'), true);
-        $data['pesanan'] = 'dengan_desain';
+        $fotoKain = $this->request->getFile('foto_kain');
 
-        if ($model->insert($data)) {
-            return $this->response->setJSON([
-                'status' => false,
-                'icon' => 'error',
-                'title' => 'Error!',
-                'text' => 'Gagal melakukan order tanpa desain',
-            ]);
+        if ($fotoKain->isValid() && !$fotoKain->hasMoved()) {
+            $fotoKainNew = $fotoKain->getRandomName();
+            $fotoKain->move('./uploads/foto/kain/', $fotoKainNew);
+
+            $data = [
+                'pesanan' => 'dengan_desain',
+                'status_track' => 'pending',
+                'id_user' => session()->get('id'),
+                'jenis_kelamin' => $this->request->getVar('jenis_kelamin'),
+                'kategori' => $this->request->getVar('kategori'),
+                'ukuran' => $this->request->getVar('ukuran'),
+                'catatan' => $this->request->getVar('catatan'),
+                'jumlah' => $this->request->getVar('jumlah'),
+                'foto_kain' => $fotoKainNew,
+                'pola_desain' => $this->request->getVar('pola_desain'),
+            ];
+
+            $model->insert($data);
+            return redirect()->to('customer/tanpa-desain')->with('success', 'Berhasil melakukan order');
         }
-        
-        return $this->response->setJSON([
-            'status' => true,
-            'icon' => 'success',
-            'title' => 'Success!',
-            'text' => 'Berhasil melakukan order tanpa desain',
-        ]);
     }
 
     public function perbaikan()
@@ -194,24 +197,27 @@ class OrderController extends BaseController
             return view('pages/home/orderPerbaikan');
         }
 
-        $data = $this->request->getRawInput();
-        $data = json_decode(file_get_contents('php://input'), true);
-        $data['pesanan'] = 'perbaikan';
+        $fotoKain = $this->request->getFile('foto_kain');
 
-        if ($model->insert($data)) {
-            return $this->response->setJSON([
-                'status' => false,
-                'icon' => 'error',
-                'title' => 'Error!',
-                'text' => 'Gagal melakukan order perbaikan',
-            ]);
+        if ($fotoKain->isValid() && !$fotoKain->hasMoved()) {
+            $fotoKainNew = $fotoKain->getRandomName();
+            $fotoKain->move('./uploads/foto/kain/', $fotoKainNew);
+
+            $data = [
+                'pesanan' => 'perbaikan',
+                'status_track' => 'pending',
+                'id_user' => session()->get('id'),
+                'jenis_kelamin' => $this->request->getVar('jenis_kelamin'),
+                'kategori' => $this->request->getVar('kategori'),
+                'ukuran' => NULL,
+                'catatan' => $this->request->getVar('catatan'),
+                'jumlah' => $this->request->getVar('jumlah'),
+                'foto_kain' => $fotoKainNew,
+                'pola_desain' => NULL,
+            ];
+
+            $model->insert($data);
+            return redirect()->to('customer/tanpa-desain')->with('success', 'Berhasil melakukan order');
         }
-        
-        return $this->response->setJSON([
-            'status' => true,
-            'icon' => 'success',
-            'title' => 'Success!',
-            'text' => 'Berhasil melakukan order perbaikan',
-        ]);
     }
 }

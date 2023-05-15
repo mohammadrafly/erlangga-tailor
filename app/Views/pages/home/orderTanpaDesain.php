@@ -64,6 +64,16 @@
                                 </div>
                                 <div class="mt-6">
                                     <div class="mb-2">
+                                        <label class="block font-medium text-gray-700 mt-4 mb-2" for="pola_desain">Jenis Kelamin</label>
+                                        <select class="w-full px-4 py-2 rounded-lg shadow-md border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200" id="jenis_kelamin" name="jenis_kelamin" required>
+                                            <option value="" disabled selected>Pilih Kategori</option>
+                                            <option value="laki-laki">Laki-laki</option>
+                                            <option value="perempuan">Perempuan</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mt-6">
+                                    <div class="mb-2">
                                         <label class="block font-medium text-gray-700 mt-4 mb-2" for="pola_desain">Kategori</label>
                                         <select class="w-full px-4 py-2 rounded-lg shadow-md border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200" id="kategori" name="kategori" required>
                                                 <option value="" disabled selected>Pilih Ukuran</option>
@@ -131,6 +141,22 @@
 <?= $this->endSection() ?>
 <?= $this->section('script') ?>
 <script>
+    const kategoriSelect = document.getElementById('kategori');
+    const ukuranTextarea = document.getElementById('ukuran');
+
+    kategoriSelect.addEventListener('change', () => {
+    const selectedOption = kategoriSelect.value;
+    
+    if (selectedOption === 'atasan') {
+        ukuranTextarea.placeholder = 'Lingkar dada:X cm, Lingkar pinggang: X cm, Lingkar pinggul: X cm, Panjang atasan: X cm';
+    } else if (selectedOption === 'bawahan') {
+        ukuranTextarea.placeholder = 'Lingkar pinggang: X cm, Lingkar pinggul: X cm, Panjang bawahan: X cm';
+    } else if (selectedOption === 'terusan') {
+        ukuranTextarea.placeholder = 'Lingkar dada:X cm, Lingkar pinggang: X cm, Lingkar pinggul: X cm, Panjang terusan: X cm';
+    }
+    });
+
+
     const toggleCheckbox = document.getElementById('switch_ukuran');
     const detailContainer = document.getElementById('ukuran_detail_container');
     const umumContainer = document.getElementById('ukuran_umum_container');

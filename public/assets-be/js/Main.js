@@ -77,7 +77,81 @@ function deleteData(id) {
       })
 }
 
-function showAlert(icon, title, text, callback) {
+function updateDataOrder(id) {
+    save_method = 'update';
+    $('#form')[0].reset(); 
+    $.ajax({
+        url : `${base_url}dashboard/orders/update/${id}`,
+        type: 'GET',
+        dataType: 'JSON',
+        success: function(respond)
+        {
+            $('[name="id"]').val(respond.id);
+            $('[name="tanggal_selesai"]').val(respond.tanggal_selesai);
+            $('[name="harga"]').val(respond.harga);
+            $('[name="status_track"]').val(respond.status_track);
+            $('#myModal').modal('show');
+            $('.modal-title').text('Update Order'); 
+        },
+        error: function (textStatus)
+        {
+            alert(textStatus);
+        }
+    });
+}
+
+function saveDataOrder() {
+    const id = $('#id').val();
+    const url = id ? `${base_url}dashboard/orders/update/${id}` : `${base_url}dashboard/orders`;
+    
+    $.ajax({
+      url,
+      type: 'POST',
+      data: $('#form').serialize(),
+      dataType: 'JSON',
+      success: (respond) => {
+        if (respond.status) {
+            showAlert(respond.icon, respond.title, respond.text)
+        } else {
+            showAlert(respond.icon, respond.title, respond.text);
+        }
+      },
+      error: (error) => {
+        showAlert('error', error, 'Telah terjadi error, silahkan hubungi admin.');
+      },
+    });
+}
+
+function deleteDataOrder(id) {
+    
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: `${base_url}dashboard/orders/delete/${id}`,
+                type: 'GET',
+                dataType: 'JSON',
+                success: function (respond) {
+                    showAlert(respond.icon, respond.title, respond.text);
+                },
+                error: function (textStatus) {
+                    showAlert('error', textStatus, 'Telah terjadi error');
+                }
+            });
+        } else if (result.isDenied) {
+          Swal.fire('Changes are not saved', '', 'info')
+        }
+      })
+}
+
+function showAlert(icon, title, text) {
     Swal.fire({
         icon: icon, 
         title: title, 

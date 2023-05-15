@@ -4,29 +4,21 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class OrderModel extends Model
+class CollectionModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'order';
+    protected $table            = 'collections';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'id_user',
-        'pesanan',
-        'foto_kain',
-        'pola_desain',
         'kategori',
-        'jumlah',
-        'jenis_kelamin',
-        'ukuran',
-        'catatan',
-        'tanggal_selesai',
-        'kode_pembayaran',
+        'product',
         'harga',
-        'status_track',
+        'estimasi',
+        'img',
         'updated_at'
     ];
 
@@ -53,17 +45,4 @@ class OrderModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    function relationOrderAndUser()
-    {
-        return $this->db->table('order')
-                        ->select('
-                            order.*,
-                            users.alamat as alamat,
-                            users.name as name,
-                            users.nomor_hp as nomor_hp,
-                        ')
-                        ->join('users', 'order.id_user = users.id')
-                        ->get()->getResultArray();
-    }
 }

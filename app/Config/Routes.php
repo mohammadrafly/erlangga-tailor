@@ -40,6 +40,7 @@ $routes->group('auth', function($routes) {
 $routes->group('dashboard', ['filter' => 'auth'], function ($routes){
     $routes->get('/', 'Home::dashboard');
 
+    $routes->match(['POST', 'GET'], 'setting', 'Home::setting');
     //users
     $routes->group('users', function($routes) {
         $routes->match(['POST', 'GET'], '/', 'UsersController::index');
@@ -53,12 +54,20 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes){
         $routes->match(['POST', 'GET'], 'update/(:num)', 'OrderController::update/$1');
         $routes->get('delete/(:num)', 'OrderController::delete/$1');
     });
+
+    //collections
+    $routes->group('collections', function($routes) {
+        $routes->match(['POST', 'GET'], '/', 'CollectionController::index');
+        $routes->get('add', 'CollectionController::add');
+        $routes->match(['POST', 'GET'], 'update/(:num)', 'CollectionController::update/$1');
+        $routes->get('delete/(:num)', 'CollectionController::delete/$1');
+    });
 });
 
 $routes->group('customer', ['filter' => 'authCustomer'], function($routes) {
+    $routes->match(['POST', 'GET'], 'profile', 'UsersController::myProfile');
     $routes->match(['POST', 'GET'], 'order', 'OrderController::myOrder');
     $routes->match(['POST', 'GET'], 'tanpa-desain', 'OrderController::tanpaDesain');
-    $routes->match(['POST', 'GET'], 'tanpa-desain/bayar/(:num)', 'OrderController::tanpaDesainBayar/$1');
     $routes->match(['POST', 'GET'], 'dengan-desain', 'OrderController::denganDesain');
     $routes->match(['POST', 'GET'], 'perbaikan', 'OrderController::perbaikan');
 });

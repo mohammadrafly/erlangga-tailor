@@ -2,108 +2,92 @@
 
 <?= $this->section('content') ?>
 
-<table id="myTable" class="min-w-full divide-y divide-gray-200">
-  <thead class="bg-gray-50">
-    <tr>
-      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pesanan</th>
-      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
-      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ukuran</th>
-      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Catatan</th>
-      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Harga</th>
-      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status Tracking</th>
-      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Opsi</th>
-    </tr>
-  </thead>
-  <tbody class="bg-white divide-y divide-gray-200">
-    <?php if ($content): ?>
+<h1 class="text-2xl font-bold mb-4">Shopping Cart</h1>
+
+                        <?php if (!empty(session()->getFlashdata('error'))) : ?>
+                            <div class="text-center font-thin p-2 inline-block bg-red-700 text-white rounded-lg">
+                            <?php echo session()->getFlashdata('error'); ?>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (!empty(session()->getFlashdata('success'))) : ?>
+                            <div class="text-center font-thin p-2 inline-block bg-green-700 text-white rounded-lg">
+                            <?php echo session()->getFlashdata('success'); ?>
+                            </div>
+                        <?php endif; ?>
+<?php if ($content): ?>
+    <form action="<?= base_url('customer/order') ?>" method="post">
         <?php foreach($content as $data): ?>
-        <tr>
-            <td class="px-6 py-4 whitespace-nowrap">
-                <?php if ($data['pesanan'] == 'tanpa_desain'): ?>
-                    Tanpa Desain
-                <?php elseif ($data['pesanan'] == 'dengan_desain'): ?>
-                    Dengan Desain
-                <?php else: ?>
-                    Perbaikan
-                <?php endif ?>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap uppercase"><?= $data['kategori'] ?></td>
-            <td class="px-6 py-4 whitespace-nowrap"><?= $data['ukuran'] ?></td>
-            <td class="px-6 py-4 whitespace-nowrap"><?= $data['catatan'] ?></td>
-            <td class="px-6 py-4 whitespace-nowrap">
-                <?php if ($data['harga'] == null): ?>
-                    IDR 0.0
-                <?php else: ?>
-                    <?= number_to_currency($data['harga'], 'IDR'); ?>
-                <?php endif ?>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-            <?php if ($data['status_track'] == 'pending'): ?>
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                    Pending
-                </span>
-            <?php elseif ($data['status_track'] == 'ditolak'): ?>
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                    Ditolak
-                </span>
-            <?php elseif ($data['status_track'] == 'diterima'): ?>
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                    Diterima
-                </span>
-            <?php elseif ($data['status_track'] == 'sudah_sampai'): ?>
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                    Sudah Sampai
-                </span>
-            <?php elseif ($data['status_track'] == 'diproses'): ?>
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                    Diproses
-                </span>
-            <?php elseif ($data['status_track'] == 'sudah_jadi'): ?>
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                    Sudah Jadi
-                </span>
-            <?php elseif ($data['status_track'] == 'belum_lunas'): ?>
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                    Belum Lunas
-                </span>
-            <?php elseif ($data['status_track'] == 'lunas'): ?>
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                    Lunas
-                </span>
-            <?php elseif ($data['status_track'] == 'dikirim'): ?>
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                    Dikirim
-                </span>
-            <?php elseif ($data['status_track'] == 'selesai'): ?>
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                    Selesai
-                </span>
-            <?php endif; ?>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-                <?php if ($data['status_track'] === 'pending'): ?>
-                    <a disabled class="opacity-50 cursor-not-allowed bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" >
-                        Bayar
-                    </a>
-                <?php else: ?>
-                    <a href="<?= base_url('customer/tanpa-desain/bayar/'.$data['id']) ?>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        Bayar
-                    </a>
-                <?php endif ?>
-            </td>
-        </tr>
+            <div class="flex items-center justify-between mb-4 p-4 bg-white rounded-md shadow-md">
+                <div class="flex items-center">
+                    <input type="checkbox" name="id[]" value="<?= $data['id'] ?>" class="mr-4 order-item" <?= $data['kode_pembayaran'] ? 'disabled' : '' ?>>
+                    <img src="<?= base_url('uploads/foto/kain/'.$data['foto_kain']) ?>" alt="Product Image" class="h-16 w-16 rounded-md object-cover" style="height: 150px; width: 150px;">
+                    <div class="ml-4">
+                        <h1 class="text-lg font-bold text-gray-800">
+                            <?php if ($data['pesanan'] == 'tanpa_desain'): ?>
+                                <span class="inline-block bg-gray-300 text-gray-700 rounded-full px-3 py-1 text-sm font-semibold ml-2">
+                                Tanpa Desain
+                                </span>
+                            <?php elseif ($data['pesanan'] == 'dengan_desain'): ?>
+                                <span class="inline-block bg-gray-300 text-gray-700 rounded-full px-3 py-1 text-sm font-semibold ml-2">
+                                Dengan Desain
+                                </span>
+                            <?php elseif ($data['pesanan'] == 'perbaikan'): ?>
+                                <span class="inline-block bg-gray-300 text-gray-700 rounded-full px-3 py-1 text-sm font-semibold ml-2">
+                                Perbaikan
+                                </span>
+                            <?php endif; ?>
+                        </h1>
+                        <p class="text-gray-500"><?= $data['kategori'] ?></p>
+                        <p class="text-gray-500"><?= $data['ukuran'] ?></p>
+                        <p class="text-gray-800 font-bold">Catatan: <span class="font-normal"><?= $data['catatan'] ?></span></p>
+                        <?php if($data['kode_pembayaran']): ?>
+                        <a href="https://wa.me/<?= $toko['nomor_wa'] ?>/?text=Check%20Order%20<?= $data['kode_pembayaran'] ?>" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+                            Check Order
+                        </a>
+                        <?php endif ?>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <span class="mx-2 text-gray-700 font-semibold">X <?= $data['jumlah'] ?></span>
+                </div>
+            </div>
         <?php endforeach ?>
-    <?php endif ?>
-    <!-- More table rows -->
-  </tbody>
-</table>
+        <div class="mt-8 flex items-center justify-between bg-white rounded-md shadow-md p-4">
+            <div class="flex items-center">
+                <input type="checkbox" id="select-all-checkbox" class="mr-2">
+                <p class="text-gray-700 font-semibold">Select All</p>
+            </div>
+            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+                Checkout
+            </button>
+        </div>
+    </form>
+<?php endif ?>
+
+
 <?= $this->endSection() ?>
 <?= $this->section('script') ?>
-
 <script>
-$(document).ready(function() {
-    $('#myTable').DataTable();
-} );
-</script>
+    const selectAll = document.querySelector('#select-all-checkbox');
+    const orderItems = document.querySelectorAll('.order-item');
 
+    selectAll.addEventListener('change', function() {
+        for (let i = 0; i < orderItems.length; i++) {
+            orderItems[i].checked = selectAll.checked;
+        }
+    });
+
+    orderItems.forEach(function(item, index) {
+        item.addEventListener('change', function() {
+            let allChecked = true;
+            for (let i = 0; i < orderItems.length; i++) {
+                if (!orderItems[i].checked) {
+                    allChecked = false;
+                    break;
+                }
+            }
+            selectAll.checked = allChecked;
+        });
+    });
+</script>
 <?= $this->endSection() ?>

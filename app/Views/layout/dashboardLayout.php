@@ -79,6 +79,7 @@
     <script src="<?= base_url('assets-be/vendors/datatables/dataTables.bootstrap4.min.js') ?>"></script>
     <script src="<?= base_url('assets-be/js/demo/datatables-demo.js') ?>"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <?= $this->renderSection('script') ?>
 </body>
 
 </html>

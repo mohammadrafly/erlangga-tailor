@@ -206,15 +206,19 @@ class OrderController extends BaseController
             ];
 
             $model->insert($data);
-            return redirect()->to('customer/dengan-pesan')->with('success', 'Berhasil melakukan order');
+            return redirect()->to('customer/dengan-desain')->with('success', 'Berhasil melakukan order');
         }
     }
 
     public function perbaikan()
     {
         $model = new OrderModel();
+        $modelCollection = new CollectionModel();
         if ($this->request->getMethod(true) !== 'POST') {
-            return view('pages/home/orderPerbaikan');
+            $data = [
+                'items' => $modelCollection->where('kategori', 'perbaikan')->findAll(),
+            ];
+            return view('pages/home/orderPerbaikan', $data);
         }
 
         $currentDate = date('Y-m-d');

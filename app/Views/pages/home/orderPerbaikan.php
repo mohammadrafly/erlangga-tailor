@@ -30,7 +30,7 @@
                                     <div class="mb-2">
                                         <label class="block font-medium text-gray-700 mt-4 mb-2" for="pola_desain">Jenis Kelamin</label>
                                         <select class="w-full px-4 py-2 rounded-lg shadow-md border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200" id="jenis_kelamin" name="jenis_kelamin" required>
-                                            <option value="" disabled selected>Pilih Kategori</option>
+                                            <option value="" disabled selected>Pilih Jenis Kelamin</option>
                                             <option value="laki-laki">Laki-laki</option>
                                             <option value="perempuan">Perempuan</option>
                                         </select>
@@ -38,17 +38,19 @@
                                 </div>
                                 <div class="mt-6">
                                     <div class="mb-2">
-                                        <label class="block font-medium text-gray-700 mt-4 mb-2" for="pola_desain">Kategori</label>
-                                        <select class="w-full px-4 py-2 rounded-lg shadow-md border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200" id="kategori" name="kategori" required>
-                                            <option value="" disabled selected>Pilih Kategori</option>
-                                            <option value="obras">Obras</option>
-                                            <option value="penambalan">Penambalan</option>
-                                            <option value="penggantian_kancing_resleting">Penggantian Kancing / Resleting</option>
-                                            <option value="perbaikan_jahitan">Perbaikan Jahitan</option>
-                                            <option value="pengganti_bagian_dalam">Pengganti Bagian Dalam</option>
-                                            <option value="penyesuaian_ukuran">Penyesuaian Ukuran</option>
-                                            <option value="perbaikan_aksesoris">Perbaikan Aksesoris</option>
-                                        </select>
+                                        <div id="zoom-container"></div>
+                                        <label class="block font-medium text-gray-700 mt-4 mb-2" for="foto_kain">Kategori</label>
+                                        <div class="scrollable-checkbox-container flex">
+                                            <?php foreach($items as $item): ?>
+                                            <label for="item-<?= $item['id'] ?>" class="flex items-center border rounded-md px-4 py-2 hover:bg-gray-100 transition-colors duration-300">
+                                                <input type="radio" id="item-<?= $item['id'] ?>" name="kategori" value="<?= $item['product'] ?>" class="mr-2">
+                                                <div class="w-24 h-24 bg-gray-200 rounded-full overflow-hidden">
+                                                    <img src="<?= base_url('uploads/foto/pola/'.$item['img']) ?>" alt="<?= $item['product'] ?>" class="object-cover w-full h-full zoomable-image">
+                                                </div>
+                                                <span class="ml-3 font-medium"><?= $item['product'] ?></span>
+                                            </label>
+                                            <?php endforeach; ?>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="mt-6">

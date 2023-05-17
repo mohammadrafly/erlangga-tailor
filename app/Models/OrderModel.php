@@ -27,7 +27,8 @@ class OrderModel extends Model
         'kode_pembayaran',
         'harga',
         'status_track',
-        'updated_at'
+        'updated_at',
+        'created_at'
     ];
 
     // Dates

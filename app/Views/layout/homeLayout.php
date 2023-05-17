@@ -93,25 +93,5 @@
     <script src="<?= base_url('assets/js/Main.js') ?>"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="<?= base_url('js/bundle.js') ?>"></script>
-    <script>
-        const images = document.querySelectorAll('.zoomable-image');
-        const zoomContainer = document.getElementById('zoom-container');
-
-        images.forEach((image) => {
-            image.addEventListener('click', () => {
-                const zoomedImg = document.createElement('img');
-                zoomedImg.src = image.src;
-                zoomedImg.classList.add('zoomed-image');
-
-                zoomContainer.appendChild(zoomedImg);
-                zoomContainer.style.display = 'flex';
-
-                zoomedImg.addEventListener('click', () => {
-                    zoomContainer.style.display = 'none';
-                    zoomedImg.remove();
-                });
-            });
-        });
-    </script>
     <?= $this->renderSection('script') ?>
 </html>

@@ -25,8 +25,6 @@
                     </a>
                 </div>
             </div>
-
-
             <footer class="py-4">
                 <div class="max-w-lg mx-auto text-center">
                     <a href="<?= base_url('/') ?>" class="inline-block px-6 py-3 rounded-lg bg-gray-300 text-gray-800 hover:bg-gray-400 transition duration-200">

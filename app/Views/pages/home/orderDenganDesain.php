@@ -140,7 +140,7 @@
                                     <div class="mb-2">
                                         <label class="block font-medium text-gray-700 mt-4 mb-2" for="pola_desain">Jenis Kelamin</label>
                                         <select class="w-full px-4 py-2 rounded-lg shadow-md border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200" id="jenis_kelamin" name="jenis_kelamin" required>
-                                            <option value="" disabled selected>Pilih Kategori</option>
+                                            <option value="" disabled selected>Pilih Jenis Kelamin</option>
                                             <option value="laki-laki">Laki-laki</option>
                                             <option value="perempuan">Perempuan</option>
                                         </select>

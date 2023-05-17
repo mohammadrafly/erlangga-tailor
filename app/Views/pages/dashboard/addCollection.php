@@ -21,7 +21,7 @@
         </div>
         <div class="form-group">
             <label for="product-price">Harga</label>
-            <input type="number" class="form-control" id="harga" name="harga" placeholder="Enter product price" value="<?= $content ? $content['harga'] : '' ?>">
+            <input type="text" class="form-control" id="harga" name="harga" placeholder="Enter product price" value="<?= $content ? $content['harga'] : '' ?>">
         </div>
         <div class="form-group">
             <label for="product-estimation">Estimasi</label>

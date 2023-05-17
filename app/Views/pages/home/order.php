@@ -40,10 +40,18 @@
                         <p class="text-gray-500"><?= $data['kategori'] ?></p>
                         <p class="text-gray-500"><?= $data['ukuran'] ?></p>
                         <p class="text-gray-800 font-bold">Catatan: <span class="font-normal"><?= $data['catatan'] ?></span></p>
-                        <?php if($data['kode_pembayaran']): ?>
-                        <a href="https://wa.me/<?= $toko['nomor_wa'] ?>/?text=Check%20Order%20<?= $data['kode_pembayaran'] ?>" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-                            Check Order
-                        </a>
+                        <?php if($data['status_track'] !== 'selesai'): ?>
+                            <?php if($data['kode_pembayaran']): ?>
+                            <a href="https://wa.me/<?= $toko['nomor_wa'] ?>/?text=Check%20Order%20<?= $data['kode_pembayaran'] ?>" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+                                Check Order
+                            </a>
+                            <?php endif ?>
+                        <?php elseif($data['status_track'] === 'selesai'): ?>
+                            <div class="p-5 bg-white">
+                                <span class="inline-flex items-center px-3 py-1 rounded-lg text-sm font-medium bg-green-500 text-white">
+                                    Pesanan Selesai
+                                </span>
+                            </div>
                         <?php endif ?>
                     </div>
                 </div>

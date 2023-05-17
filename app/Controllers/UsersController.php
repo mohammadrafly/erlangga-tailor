@@ -60,6 +60,8 @@ class UsersController extends BaseController
             'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
             'name' => $this->request->getVar('name'),
             'role' => $this->request->getVar('role'),
+            'alamat' => $this->request->getVar('alamat'),
+            'nomor_hp' => $this->request->getVar('nomor_hp'),
         ];
 
         if ($model->where('username', $data['username'])->first()) {
@@ -100,8 +102,10 @@ class UsersController extends BaseController
         }
 
         $data = [
-            'name' => $this->request->getPost('name'),
-            'role' => $this->request->getPost('role'),
+            'name' => $this->request->getVar('name'),
+            'role' => $this->request->getVar('role'),
+            'alamat' => $this->request->getVar('alamat'),
+            'nomor_hp' => $this->request->getVar('nomor_hp'),
         ];
 
         $model->update($id, $data);

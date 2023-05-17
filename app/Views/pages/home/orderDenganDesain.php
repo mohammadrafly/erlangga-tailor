@@ -222,11 +222,11 @@
     const selectedOption = kategoriSelect.value;
     
     if (selectedOption === 'atasan') {
-        ukuranTextarea.placeholder = 'Lingkar dada:X cm, Lingkar pinggang: X cm, Lingkar pinggul: X cm, Panjang atasan: X cm';
+        ukuranTextarea.placeholder = 'Lingkar Leher (LL): X cm, Lingkar Dada (LD): X cm, Lebar Bahu (LB) : X cm, Lingkar Pinggang (LP): X cm, Panjang Lengan (PL): X cm, Panjang atasan/Baju (PB): X cm';
     } else if (selectedOption === 'bawahan') {
-        ukuranTextarea.placeholder = 'Lingkar pinggang: X cm, Lingkar pinggul: X cm, Panjang bawahan: X cm';
+        ukuranTextarea.placeholder = 'Lingkar Pinggang (LP): X cm, Lingkar Paha (LPh): X cm, Panjang bawahan/Baju (PB): X cm';
     } else if (selectedOption === 'terusan') {
-        ukuranTextarea.placeholder = 'Lingkar dada:X cm, Lingkar pinggang: X cm, Lingkar pinggul: X cm, Panjang terusan: X cm';
+        ukuranTextarea.placeholder = 'Lingkar Leher (LL):X cm, Lingkar Dada (LD): X cm, Lebar Bahu (LB): X cm, Lingkar Pinggang (LP): X cm, Panjang Lengan (PL): X cm, Lingkar Paha (LPh): X cm, Panjang Terusan/Baju (PB): X cm';
     }
     });
     

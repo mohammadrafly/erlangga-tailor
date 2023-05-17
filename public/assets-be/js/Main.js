@@ -12,12 +12,20 @@ function update(id) {
             $('[name="id"]').val(respond.data.id);
             $('[name="name"]').val(respond.data.name);
             $('[name="role"]').val(respond.data.role);
+            $('[name="alamat"]').val(respond.data.alamat);
+            $('[name="nomor_hp"]').val(respond.data.nomor_hp);
             $('#myModal').modal('show');
             $('.modal-title').text('Edit User'); 
 
             $('#password-input').hide();
             $('#username-input').hide();
             $('#email-input').hide();
+
+            // Add event listener to modal close event
+            $('#myModal').on('hidden.bs.modal', function () {
+                $('#form')[0].reset(); // Reset the form
+                location.reload();
+            });
         },
         error: function (textStatus)
         {
@@ -92,6 +100,10 @@ function updateDataOrder(id) {
             $('[name="status_track"]').val(respond.status_track);
             $('#myModal').modal('show');
             $('.modal-title').text('Update Order'); 
+
+            $('#myModal').on('hidden.bs.modal', function () {
+                $('#form')[0].reset();
+            });
         },
         error: function (textStatus)
         {

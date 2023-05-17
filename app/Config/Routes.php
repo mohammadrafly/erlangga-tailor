@@ -40,6 +40,8 @@ $routes->group('auth', function($routes) {
 $routes->group('dashboard', ['filter' => 'auth'], function ($routes){
     $routes->get('/', 'Home::dashboard');
 
+    $routes->post('export/order', 'OrderController::export');
+
     $routes->match(['POST', 'GET'], 'setting', 'Home::setting');
     //users
     $routes->group('users', function($routes) {
@@ -72,7 +74,13 @@ $routes->group('customer', ['filter' => 'authCustomer'], function($routes) {
     $routes->match(['POST', 'GET'], 'perbaikan', 'OrderController::perbaikan');
 });
 
+$routes->get('collection', 'CollectionController::displayCollection');
+$routes->get('promo', 'CollectionController::displayPromo');
+
 $routes->get('sign-out', 'AuthController::signOut');
+
+//webpack
+$routes->add('js/(:any)', 'StaticFiles::serve/$1');
 
 
 /*

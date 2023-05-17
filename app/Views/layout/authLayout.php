@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Auth CI4 Tailwind</title>
+    <title>Erlangga Tailor - Authentication</title>
     <meta name="description" content="The small framework with powerful features">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="/favicon.ico">
     <link rel="stylesheet" href="<?= base_url('assets/output.css') ?>">
 
     <body class="bg-gray-900">
-        <div class="min-h-screen flex items-center justify-center">
+        <div class="min-h-screen flex items-center justify-center mx-auto">
             <div class="max-w-md w-full">
                 <div class="text-center font-bold m-5 mb-7 flex justify-center">
                     <a href="<?= base_url('/') ?>" class="text-4xl text-white mb-2">ERLANGGA TAILOR</a>
@@ -18,6 +18,9 @@
                     </span>
                 </div>
                 <?= $this->renderSection('content') ?>
+                <div class="mt-10 text-center">
+                    <a href="<?= base_url('/') ?>" class="bg-white hover:bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded">Home</a>
+                </div>
             </div>
         </div>
     </body>

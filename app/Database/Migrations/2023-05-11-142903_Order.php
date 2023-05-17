@@ -75,13 +75,11 @@ class Order extends Migration
                 'null' => false,
             ],
             'created_at' => [
-                'type' => 'TIMESTAMP',
-                'default' => new RawSql('CURRENT_TIMESTAMP'),
+                'type' => 'DATE',
             ],
             'updated_at' => [
-                'type' => 'TIMESTAMP',
-                'default' => new RawSql('CURRENT_TIMESTAMP'),
-            ],
+                'type' => 'DATE',
+            ]
         ]);
         $this->forge->addKey('id', TRUE);
         $this->forge->createTable('order', TRUE);

@@ -66,4 +66,26 @@ class OrderModel extends Model
                         ->join('users', 'order.id_user = users.id')
                         ->get()->getResultArray();
     }
+
+    public function RangeDate($start, $end, $status = '')
+    {
+        $query = $this->db->table('order')
+                        ->select('
+                            order.*,
+                            users.alamat as alamat,
+                            users.name as name,
+                            users.nomor_hp as nomor_hp,
+                        ')
+                        ->join('users', 'order.id_user = users.id')
+                        ->where('order.created_at BETWEEN "'. date('Y-m-d', strtotime($start)). '" AND "'. date('Y-m-d', strtotime($end)).'"');
+    
+        if ($status !== '') {
+            $query->where('status_track', $status);
+        }
+    
+        $query->orderBy('order.created_at', 'DESC');
+        
+        $result = $query->get()->getResult();
+        return $result;
+    }  
 }

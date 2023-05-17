@@ -19,6 +19,14 @@
                                             <label for="inputName">Username</label>
                                             <input type="text" class="form-control" id="username" name="username" placeholder="masukkan username">
                                         </div>
+                                        <div id="username-input" class="form-group">
+                                            <label for="inputName">Nomor HP</label>
+                                            <input type="number" class="form-control" id="nomor_hp" name="nomor_hp" placeholder="masukkan nomor hp">
+                                        </div>
+                                        <div id="username-input" class="form-group">
+                                            <label for="inputName">Alamat</label>
+                                            <textarea type="text" class="form-control" id="alamat" name="alamat" placeholder="masukkan alamat"></textarea>
+                                        </div>
                                         <div id="password-input" class="form-group">
                                             <label for="inputName">Password</label>
                                             <input type="password" class="form-control" id="password" name="password" placeholder="masukkan password">

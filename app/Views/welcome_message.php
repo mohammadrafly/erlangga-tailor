@@ -6,7 +6,6 @@
                         <div class="max-w-3xl mx-auto">
                             <h1 class="text-5xl font-bold mb-4">Welcome to ERLANGGA TAILOR</h1>
                             <p class="text-xl mb-6">Melayani Pemesanan Jasa Menjahit <br><strong>Ekspresikan Fashionmu Bersama Kami</strong><br> Kami Senang Melayani Anda.</p>
-                            <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-full inline-block font-bold">Learn More</a>
                         </div>
                     </div>
                 </section>
@@ -71,34 +70,6 @@
                             </div>
                         </div>
                     </div>
-                </section>
-
-                <section class="py-12 mb-10">
-                    <h2 class="text-4xl font-bold mb-8">Collections</h2>
-
-                    <?php if($content): ?>
-                        <?php foreach($content as $data): ?>
-                        <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                            <div class="group relative">
-                                <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                                    <img src="<?= base_url('uploads/foto/pola/'.$data['img']) ?>" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-                                </div>
-                                    <div class="mt-4 flex justify-between">
-                                        <div>
-                                            <h3 class="text-sm text-gray-700">
-                                            <a href="#">
-                                                <span aria-hidden="true" class="absolute inset-0"></span>
-                                                <?= $data['product'] ?>
-                                            </a>
-                                            </h3>
-                                            <p class="mt-1 text-sm text-gray-500"><?= $data['estimasi'] ?></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <?php endforeach ?>
-                    <?php endif ?>
                 </section>
 
                 <section class="py-12">
@@ -190,39 +161,29 @@
                             <div class="grid md:grid-cols-2 gap-8">
                                 <!-- Map -->
                                 <div class="relative overflow-hidden rounded-lg shadow-lg">
-                                    <iframe class="w-full h-96" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3951.242324485315!2d112.62934830430676!3d-7.973888965441158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sid!2sid!4v1684190525642!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                    <iframe class="w-full h-96" src="<?= $toko['embed_link'] ?>" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                                     <div class="absolute top-0 bottom-0 left-0 right-0 w-full h-full z-10 bg-gradient-to-b from-transparent to-black"></div>
                                         <div class="absolute top-0 left-0 px-4 py-2 z-20">
                                             <h2 class="text-lg font-semibold text-white">Our Location</h2>
-                                            <p class="text-gray-300">Jl. M.H. Thamrin No.1, RT.1/RW.5, Menteng, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10310</p>
+                                            <p class="text-gray-300"><?= $toko['alamat'] ?></p>
                                         </div>
                                     </div>
                                     <!-- Contact Form -->
-                                    <div class="py-4 md:py-0">
+                                    <div class="">
                                         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                                             <div class="mb-4">
-                                                <label class="block text-gray-700 font-bold mb-2" for="name">
-                                                    Name
-                                                </label>
-                                                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Your Name">
-                                            </div>
-                                            <div class="mb-4">
-                                                <label class="block text-gray-700 font-bold mb-2" for="email">
-                                                    Email
-                                                </label>
-                                                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Your Email">
-                                            </div>
-                                            <div class="mb-4">
                                                 <label class="block text-gray-700 font-bold mb-2" for="message">
-                                                Message
+                                                    Message
                                                 </label>
-                                                <textarea class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="message" rows="6" placeholder="Your Message"></textarea>
+                                                <textarea class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="message" rows="10" placeholder="Your Message"></textarea>
                                             </div>
                                             <div class="flex items-center justify-between">
-                                                <button class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4  rounded focus:outline-none focus:shadow-outline" type="button">
-                                                Send Message
-                                                </button>
-                                                <p class="text-gray-600 text-sm">We'll get back to you within 1-2 business days.</p>
+                                                <a href="#" id="whatsapp-link" target="_blank">
+                                                    <button class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onclick="setWhatsAppLink()">
+                                                        Kirim Pesan WA
+                                                    </button>
+                                                </a>
+                                                <p class="text-gray-600 text-sm">Respon cepat.</p>
                                             </div>
                                         </form>
                                     </div>
@@ -235,14 +196,10 @@
 <?= $this->endSection() ?>
 <?= $this->section('script') ?>
 <script>
-  const accordionItems = document.querySelectorAll('.py-4');
-
-  accordionItems.forEach(item => {
-    const accordionButton = item.querySelector('button');
-    accordionButton.addEventListener('click', () => {
-      const accordionContent = item.querySelector('.hidden');
-      accordionContent.classList.toggle('hidden');
-    });
-  });
+    function setWhatsAppLink() {
+        var message = encodeURIComponent(document.getElementById('message').value);
+        var link = document.getElementById('whatsapp-link');
+        link.href = "https://wa.me/<?= $toko['nomor_wa'] ?>?text=" + message;
+    }
 </script>
 <?= $this->endSection() ?>

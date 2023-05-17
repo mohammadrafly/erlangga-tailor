@@ -52,7 +52,7 @@
                 </div>
             </div>
         <?php endforeach ?>
-        <div class="mt-8 flex items-center justify-between bg-white rounded-md shadow-md p-4">
+        <div class="mt-8 flex items-center justify-between bg-white rounded-md shadow-md p-4 mb-20">
             <div class="flex items-center">
                 <input type="checkbox" id="select-all-checkbox" class="mr-2">
                 <p class="text-gray-700 font-semibold">Select All</p>

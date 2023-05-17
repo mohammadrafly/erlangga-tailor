@@ -28,6 +28,10 @@
             <label for="exampleFormControlTextarea1">Alamat</label>
             <textarea name="alamat" class="form-control" id="exampleFormControlTextarea1" rows="3"><?= $content['alamat'] ?></textarea>
           </div>
+          <div class="form-group">
+            <label for="inputNomorTelepon">Embed Link for GMaps</label>
+            <input name="embed_link" type="text" class="form-control" id="inputNomorTelepon" placeholder="Embed Link" value="<?= $content['embed_link'] ?>">
+          </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>

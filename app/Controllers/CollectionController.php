@@ -7,6 +7,20 @@ use App\Models\CollectionModel;
 
 class CollectionController extends BaseController
 {
+    public function displayCollection()
+    {
+        $model = new CollectionModel();
+        $data = [
+            'content' => $model->findAll()
+        ];
+        return view('pages/home/collection',$data);
+    }
+
+    public function displayPromo()
+    {
+        return view('pages/home/promo');
+    }
+
     public function add()
     {
         $data = [

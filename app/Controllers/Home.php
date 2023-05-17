@@ -3,14 +3,19 @@
 namespace App\Controllers;
 
 use App\Models\CollectionModel;
+use App\Models\OrderModel;
+use App\Models\UserModel;
 
 class Home extends BaseController
 {
     public function index()
     {
         $model = new CollectionModel();
+        $json_file_path = WRITEPATH . 'data-toko.json';
+        $json_data = $this->read_file($json_file_path);
         $data = [
             'content' => $model->findAll(),
+            'toko' => json_decode($json_data, true),
         ];
         return view('welcome_message', $data);
     }
@@ -27,7 +32,17 @@ class Home extends BaseController
 
     public function dashboard()
     {
-        return view('pages/dashboard/index', ['title' => 'Dashboard']);
+        $modelUser = new UserModel();
+        $modelOrder = new OrderModel();
+        $modelCollection = new CollectionModel();
+        $data = [
+            'title' => 'Dashboard',
+            'total_user' => $modelUser->countAllResults(),
+            'total_order' => $modelOrder->countAllResults(),
+            'total_collection' => $modelCollection->countAllResults(),
+            'total_order_selesai' => $modelOrder->where('status_track', 'selesai')->countAllResults(),
+        ];
+        return view('pages/dashboard/index',$data);
     }
 
     private function read_file($file_path) {
@@ -44,6 +59,7 @@ class Home extends BaseController
                 'nomor_wa' => $this->request->getVar('nomor_wa'),
                 'nama_pemilik' => $this->request->getVar('nama_pemilik'),
                 'alamat' => $this->request->getVar('alamat'),
+                'embed_link' => $this->request->getVar('embed_link'),
             ];
     
             $json_data = json_encode($data);

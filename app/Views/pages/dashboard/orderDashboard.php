@@ -11,100 +11,57 @@
                         </div>
                         <?= $this->include('pages/partials/modalRangeDate') ?>
                         <?= $this->include('pages/partials/modalOrder') ?>
+                        <?= $this->include('pages/partials/modalDetail') ?>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Nama</th>
-                                            <th>Pesanan</th>
-                                            <th>Foto Kain</th>
-                                            <th>Pola Desain</th>
-                                            <th>Kategori</th>
-                                            <th>Jumlah</th>
-                                            <th>Jenis Kelamin</th>
-                                            <th>Nomor Penerima</th>
-                                            <th>Alamat</th>
-                                            <th>Tanggal Selesai</th>
-                                            <th>Harga</th>
-                                            <th>Ukuran</th>
-                                            <th>Catatan</th>
-                                            <th>Kode Pembayaran</th>
-                                            <th>Status Tracking</th>
-                                            <th>Tanggal Pemesanan</th>
-                                            <th>Tanggal Update</th>
-                                            <th>Opsi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php foreach ($content as $data): ?>
-                                        <tr>
-                                            <td><?= $data['name'] ?></td>
-                                            <td>
-                                                <?php if ($data['pesanan'] == 'tanpa_desain'): ?>
-                                                    <span class="badge badge-primary">Tanpa Desain</span>
-                                                <?php elseif ($data['pesanan'] == 'dengan_desain'): ?>
-                                                    <span class="badge badge-success">Dengan Desain</span>
-                                                <?php elseif ($data['pesanan'] == 'perbaikan'): ?>
-                                                    <span class="badge badge-warning">Perbaikan</span>
-                                                <?php endif; ?>
-                                            </td>
-                                            <td><img src="<?= base_url('uploads/foto/kain/' . $data['foto_kain']) ?>" alt="Kain Photo" width="100"></td>
-                                            <td><img src="<?= base_url('uploads/foto/pola/' . $data['pola_desain']) ?>" alt="Kain Photo" width="100"></td>
-                                            <td><?= $data['kategori'] ?></td>
-                                            <td><?= $data['jumlah'] ?></td>
-                                            <td><?= $data['jenis_kelamin'] ?></td>
-                                            <td><?= $data['nomor_hp'] ?></td>
-                                            <td><?= $data['alamat'] ?></td>
-                                            <td><?= $data['tanggal_selesai'] ?></td>
-                                            <td>
-                                                <?php if ($data['harga'] == ''): ?>
-                                                    IDR 0,0
-                                                <?php else: ?>
-                                                    <?= number_to_currency($data['harga'], 'IDR') ?>
-                                                <?php endif; ?>
-                                            </td>
-                                            <td><?= $data['ukuran'] ?></td>
-                                            <td><?= $data['catatan'] ?></td>
-                                            <td><?= $data['kode_pembayaran'] ?></td>
-                                            <td>
-                                                <?php if ($data['status_track'] == 'pending'): ?>
-                                                    <span class="badge badge-primary">Pending</span>
-                                                <?php elseif ($data['status_track'] == 'dibatalkan'): ?>
-                                                    <span class="badge badge-danger">Dibatalkan</span>
-                                                <?php elseif ($data['status_track'] == 'diterima'): ?>
-                                                    <span class="badge badge-success">Diterima</span>
-                                                <?php elseif ($data['status_track'] == 'sudah_sampai'): ?>
-                                                    <span class="badge badge-info">Sudah Sampai</span>
-                                                <?php elseif ($data['status_track'] == 'diproses'): ?>
-                                                    <span class="badge badge-warning">Diproses</span>
-                                                <?php elseif ($data['status_track'] == 'sudah_jadi'): ?>
-                                                    <span class="badge badge-success">Sudah Jadi</span>
-                                                <?php elseif ($data['status_track'] == 'belum_lunas'): ?>
-                                                    <span class="badge badge-warning">Belum Lunas</span>
-                                                <?php elseif ($data['status_track'] == 'lunas'): ?>
-                                                    <span class="badge badge-success">Lunas</span>
-                                                <?php elseif ($data['status_track'] == 'dikirim'): ?>
-                                                    <span class="badge badge-info">Dikirim</span>
-                                                <?php elseif ($data['status_track'] == 'selesai'): ?>
-                                                    <span class="badge badge-success">Selesai</span>
-                                                <?php endif; ?>
-                                            </td>
+                            <div>
+                                <ul class="nav nav-tabs mt-4" id="orderTabs" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="pending-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="true">Pending & Dibatalkan</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="processed-tab" data-toggle="tab" href="#processed" role="tab" aria-controls="processed" aria-selected="false">Diterima, Sudah Sampai, Diproses</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="ready-tab" data-toggle="tab" href="#ready" role="tab" aria-controls="ready" aria-selected="false">Sudah Jadi, Belum Lunas</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="completed-tab" data-toggle="tab" href="#completed" role="tab" aria-controls="completed" aria-selected="false">Lunas, Dikirim, Selesai</a>
+                                    </li>
+                                </ul>
 
-                                            <td><?= $data['created_at'] ?></td>
-                                            <td><?= $data['updated_at'] ?></td>
-                                            <td>
-                                                <button onclick="updateDataOrder(<?= $data['id'] ?>)" class="btn btn-primary btn-sm mr-2">
-                                                    <i class="fas fa-edit"></i> Edit
-                                                </button>
-                                                <button onclick="deleteDataOrder(<?= $data['id'] ?>)" class="btn btn-danger btn-sm">
-                                                    <i class="fas fa-trash"></i> Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach ?>
-                                    </tbody>
-                                </table>
+                                <div class="tab-content mt-4" id="orderTabContent">
+                                    <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered" id="pendingTable" width="100%" cellspacing="0">
+                                                <?= $this->include('pages/partials/tablePending') ?>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="processed" role="tabpanel" aria-labelledby="processed-tab">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered" id="processedTable" width="100%" cellspacing="0">
+                                                <?= $this->include('pages/partials/tableProcessed') ?>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="ready" role="tabpanel" aria-labelledby="ready-tab">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered" id="readyTable" width="100%" cellspacing="0">
+                                                <?= $this->include('pages/partials/tableReady') ?>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered" id="completedTable" width="100%" cellspacing="0">
+                                                <?= $this->include('pages/partials/tableComplete') ?>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

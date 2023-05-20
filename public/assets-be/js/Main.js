@@ -1,5 +1,58 @@
 const base_url = 'http://localhost:8080/';
 
+function showOrderDetails(orderId) {
+    $.ajax({
+      url: `${base_url}dashboard/orders/update/${orderId}`,
+      method: 'GET',
+      dataType: 'JSON',
+      success: function (response) {
+        var orderDetails = response;
+  
+        var modalBody = $('#orderDetailsModal .modal-body');
+        modalBody.empty();
+  
+        var keysToDisplay =  ['pesanan', 'kategori', 'jumlah', 'jenis_kelamin', 'ukuran', 'tanggal_selesai','harga', 'kode_pembayaran','status_track']; // Specify the keys you want to display
+        var labels = ['Pesanan', 'Kategori', 'Jumlah', 'Jenis Kelamin', 'Ukuran', 'Tanggal Selesai', 'Harga', 'Kode Pembayaran', 'Status Tracking']; // Specify the labels for the corresponding keys
+  
+        var invoiceContainer = $('<div>').addClass('card');
+        var invoiceHeader = $('<div>').addClass('card-header text-center').append($('<h4>').addClass('h4 mb-0').text('Invoice'));
+        var invoiceDetails = $('<div>').addClass('card-body');
+  
+        keysToDisplay.forEach(function (key, index) {
+          if (orderDetails.hasOwnProperty(key)) {
+            var detailRow = $('<div>').addClass('row mb-3');
+            var detailKey = $('<div>').addClass('col-sm-6 font-weight-bold').text(labels[index]);
+            var detailValue = $('<div>').addClass('col-sm-6');
+  
+            var badgeClass = 'badge badge-primary'; // Customize badge color if needed
+            var badgeText = orderDetails[key]; // Set the badge text to the corresponding order detail value
+            var badge = $('<span>').addClass(badgeClass).text(badgeText);
+            detailValue.append(badge);
+  
+            detailRow.append(detailKey);
+            detailRow.append(detailValue);
+            invoiceDetails.append(detailRow);
+          }
+        });
+  
+        invoiceContainer.append(invoiceHeader);
+        invoiceContainer.append(invoiceDetails);
+        modalBody.append(invoiceContainer);
+      },
+      error: function (xhr, status, error) {
+        console.error(error);
+        // Display an error message or handle the error as needed
+      },
+    });
+  }  
+  
+// Optional: Clear modal content when it's closed
+$('#orderDetailsModal').on('hidden.bs.modal', function () {
+    var modalBody = document.querySelector('#orderDetailsModal .modal-body');
+    modalBody.innerHTML = '';
+});
+
+
 function update(id) {
     save_method = 'update';
     $('#form')[0].reset(); 

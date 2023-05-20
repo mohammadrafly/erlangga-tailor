@@ -13,6 +13,7 @@ class Home extends BaseController
         $model = new CollectionModel();
         $json_file_path = WRITEPATH . 'data-toko.json';
         $json_data = $this->read_file($json_file_path);
+
         $data = [
             'content' => $model->findAll(),
             'toko' => json_decode($json_data, true),
@@ -35,7 +36,12 @@ class Home extends BaseController
         $modelUser = new UserModel();
         $modelOrder = new OrderModel();
         $modelCollection = new CollectionModel();
+
+        $newOrderCount = $modelOrder->where('status_track', 'new')->countAllResults();
+        $hasNewData = ($newOrderCount > 0);
+
         $data = [
+            'hasNewData' => $hasNewData,
             'title' => 'Dashboard',
             'total_user' => $modelUser->countAllResults(),
             'total_order' => $modelOrder->countAllResults(),
@@ -84,6 +90,10 @@ class Home extends BaseController
         if (!$data) {
             return view('pages/dashboard/profile');
         }
+        $modelOrder = new OrderModel();
+        $newOrderCount = $modelOrder->where('status_track', 'new')->countAllResults();
+        $hasNewData = ($newOrderCount > 0);
+        $data['hasNewData'] = $hasNewData;
         return view('pages/dashboard/profile', $data);
     }
 }

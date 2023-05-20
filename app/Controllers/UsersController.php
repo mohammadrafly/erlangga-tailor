@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\UserModel;
+use App\Models\OrderModel;
 
 class UsersController extends BaseController
 {
@@ -47,9 +48,13 @@ class UsersController extends BaseController
     {
         $model = new UserModel();
         if ($this->request->getMethod(true) !== 'POST' && !$this->request->isAJAX()) {
+            $modelOrder = new OrderModel();
+            $newOrderCount = $modelOrder->where('status_track', 'new')->countAllResults();
+            $hasNewData = ($newOrderCount > 0);
             $data = [
                 'content' => $model->findAll(),
                 'title' => 'Data User',
+                'hasNewData' => $hasNewData
             ];
             return view('pages/dashboard/usersDashboard', $data);
         }

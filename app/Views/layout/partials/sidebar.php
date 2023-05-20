@@ -23,7 +23,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('dashboard/orders') ?>">
                     <i class="fas fa-fw fa-shopping-cart"></i>
-                    <span>Data Order</span></a>
+                    <span>Data Order</span>
+                    <?php if ($hasNewData): ?>
+                        <span class="badge badge-danger">New</span>
+                    <?php endif; ?>
+                </a>
             </li>
 
             <li class="nav-item">

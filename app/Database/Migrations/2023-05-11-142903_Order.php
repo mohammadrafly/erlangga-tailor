@@ -70,8 +70,8 @@ class Order extends Migration
                 'constraint' => '255',
             ],  
             'status_track' => [
-                'type' => "ENUM('pending','dibatalkan', 'diterima', 'sudah_sampai', 'diproses', 'sudah_jadi', 'belum_lunas', 'lunas', 'dikirim', 'selesai')",
-                'default' => 'pending',
+                'type' => "ENUM('new','pending','dibatalkan', 'diterima', 'sudah_sampai', 'diproses', 'sudah_jadi', 'belum_lunas', 'lunas', 'dikirim', 'selesai')",
+                'default' => 'new',
                 'null' => false,
             ],
             'created_at' => [

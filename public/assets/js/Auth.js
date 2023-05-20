@@ -1,3 +1,18 @@
+async function handleResponse(response) {
+  try {
+    if (response.status) {
+      await showAlert(response.icon, response.title, response.text);
+      setTimeout(() => {
+        window.location.href = `${base_url}auth/sign-in`;
+      }, 3000);
+    } else {
+      showAlert(response.icon, response.title, response.text);
+    }
+  } catch (error) {
+    console.error('Error handling response:', error);
+  }
+}
+
 $(document).ready(function() {
   $('#SignUp').submit(function(event) {
       event.preventDefault();
@@ -66,20 +81,7 @@ $(document).ready(function() {
           },
           dataType: 'JSON',
           success: function(response) {
-              if (response.status) {
-                swal.fire({
-                    icon: response.icon,
-                    title: response.title,
-                    text: response.text,
-                    showCancelButton: false,
-                    showConfirmButton: false,
-                    timer: 3000
-                }).then (function(response) {
-                  showAlert(response.icon, response.title, response.text);
-                });
-              } else {
-                showAlert(response.icon, response.title, response.text);
-              }
+            handleResponse(response);
           },
           error: function() {
             showAlert(response.icon, response.title, response.text);

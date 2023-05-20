@@ -4,14 +4,16 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\CollectionModel;
+use App\Models\OrderModel;
 
 class CollectionController extends BaseController
 {
     public function displayCollection()
     {
         $model = new CollectionModel();
+
         $data = [
-            'content' => $model->findAll()
+            'content' => $model->findAll(),
         ];
         return view('pages/home/collection',$data);
     }
@@ -34,9 +36,13 @@ class CollectionController extends BaseController
     {
         $model = new CollectionModel();
         if ($this->request->getMethod(true) !== 'POST') {
+            $modelOrder = new OrderModel();
+            $newOrderCount = $modelOrder->where('status_track', 'new')->countAllResults();
+            $hasNewData = ($newOrderCount > 0);
             $data = [
                 'content' => $model->findAll(),
-                'title' => 'Data Collections'
+                'title' => 'Data Collections',
+                'hasNewData' => $hasNewData,
             ];
             return view('pages/dashboard/collectionDashboard',$data);
         }

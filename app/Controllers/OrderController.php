@@ -18,11 +18,26 @@ class OrderController extends BaseController
 
         //if method not POST then displaying pages
         if ($this->request->getMethod(true) !== 'POST') {
-            //array of data for content
+            $dataToUpdate = ['status_track' => 'pending'];
+            $model->where('status_track', 'new')->set($dataToUpdate)->update();
+
+            $newOrderCount = $model->where('status_track', 'new')->countAllResults();
+            $hasNewData = ($newOrderCount > 0);
+
+            $statusPending = ['pending', 'dibatalkan'];
+            $statusReady = ['sudah_jadi', 'belum_lunas'];
+            $statusProcessed = ['diterima', 'sudah_sampai', 'diproses'];
+            $statusComplete = ['lunas', 'dikirim', 'selesai'];
             $data = [
+                'hasNewData' => $hasNewData,
                 'content' => $model->relationOrderAndUser(),
+                'contentPending' => $model->relationOrderAndUserByField($statusPending),
+                'contentReady' => $model->relationOrderAndUserByField($statusReady),
+                'contentProcessed' => $model->relationOrderAndUserByField($statusProcessed),
+                'contentComplete' => $model->relationOrderAndUserByField($statusComplete),
                 'title' => 'Data Orders'
             ];
+            //dd($data['contentPending']);
             //returning view from Folder Views/pages/dashboard
             return view('pages/dashboard/orderDashboard', $data);
         }
@@ -152,7 +167,7 @@ class OrderController extends BaseController
 
             $data = [
                 'pesanan' => 'tanpa_desain',
-                'status_track' => 'pending',
+                'status_track' => 'new',
                 'id_user' => session()->get('id'),
                 'jenis_kelamin' => $this->request->getVar('jenis_kelamin'),
                 'kategori' => $this->request->getVar('kategori'),
@@ -192,7 +207,7 @@ class OrderController extends BaseController
 
             $data = [
                 'pesanan' => 'dengan_desain',
-                'status_track' => 'pending',
+                'status_track' => 'new',
                 'id_user' => session()->get('id'),
                 'jenis_kelamin' => $this->request->getVar('jenis_kelamin'),
                 'kategori' => $this->request->getVar('kategori'),

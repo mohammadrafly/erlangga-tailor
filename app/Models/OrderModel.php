@@ -55,6 +55,21 @@ class OrderModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
+    function relationOrderAndUserByField(array $status)
+    {
+        return $this->db->table('order')
+                        ->select('
+                            order.*,
+                            users.alamat as alamat,
+                            users.name as name,
+                            users.nomor_hp as nomor_hp
+                        ')
+                        ->join('users', 'order.id_user = users.id')
+                        ->whereIn('status_track', $status)
+                        ->get()
+                        ->getResultArray();
+    }    
+
     function relationOrderAndUser()
     {
         return $this->db->table('order')

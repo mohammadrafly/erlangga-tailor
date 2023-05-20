@@ -25,9 +25,13 @@ class CollectionController extends BaseController
 
     public function add()
     {
+        $modelOrder = new OrderModel();
+        $newOrderCount = $modelOrder->where('status_track', 'new')->countAllResults();
+        $hasNewData = ($newOrderCount > 0);
         $data = [
             'title' => 'Tambah Collections',
-            'content' => ''
+            'content' => '',
+            'hasNewData' => $hasNewData,
         ];
         return view('pages/dashboard/addCollection', $data);
     }
@@ -70,9 +74,13 @@ class CollectionController extends BaseController
     {
         $model = new CollectionModel();
         if ($this->request->getMethod(true) !== 'POST') {
+            $modelOrder = new OrderModel();
+            $newOrderCount = $modelOrder->where('status_track', 'new')->countAllResults();
+            $hasNewData = ($newOrderCount > 0);
             $data = [
                 'content' => $model->find($id),
-                'title' => 'Update Collection'
+                'title' => 'Update Collection',
+                'hasNewData' => $hasNewData,
             ];
             return view('pages/dashboard/addCollection', $data);
         }

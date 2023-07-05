@@ -157,6 +157,26 @@
                                         </select>
                                     </div>
                                 </div>
+                                <!-- <div class="mt-6">
+                                    <div class="mb-2">
+                                    <div id="zoom-container"></div>
+                                    <label class="block font-medium text-gray-700 mt-4 mb-2" for="Info"></label>
+                                        <div class="scrollable-checkbox-container">
+                                                <label  class="flex items-center border rounded-md px-4 py-2 hover:bg-gray-100 transition-colors duration-300">
+                                                    <div class="w-24 h-24 bg-gray-200 rounded-full overflow-hidden">
+                                                        <img src="<?=base_url('assets/img/ukuran.png') ?>" alt="" class="object-cover w-full h-full zoomable-image">
+                                                    </div>
+                                                    <span class="ml-3 font-medium">Info ukuran detail</span>
+                                                </label>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="mt-6">
+                                    <div class="mb-2">
+                                        <label class="block font-medium text-gray-700 mt-4 mb-2" for="info_ukuran">Info Ukuran Detail</label>
+                                        <span id="detail" type="text" name="detail">Masukkan : Lingkar dada:X cm, Lingkar pinggang: X cm, Lingkar pinggul: X cm, Panjang atasan: X cm</span>
+                                    </div>
+                                </div>
                                 <div class="mt-6">
                                     <div class="flex items-center mb-4">
                                         <label class="mr-4 font-medium text-gray-700" for="switch_ukuran">Ukuran</label>
@@ -205,7 +225,7 @@
                                     </div>
                                 </div>
                                 <button class="mt-4 bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-300" type="submit">
-                                    Pesan
+                                    Masukkan Keranjang
                                 </button>
                             </form>
                         </div>
@@ -217,6 +237,7 @@
 <script>
     const kategoriSelect = document.getElementById('kategori');
     const ukuranTextarea = document.getElementById('ukuran');
+    const detailSpan = document.getElementById('detail');
 
     kategoriSelect.addEventListener('change', () => {
     const selectedOption = kategoriSelect.value;
@@ -228,8 +249,16 @@
     } else if (selectedOption === 'terusan') {
         ukuranTextarea.placeholder = 'Lingkar Leher (LL):X cm, Lingkar Dada (LD): X cm, Lebar Bahu (LB): X cm, Lingkar Pinggang (LP): X cm, Panjang Lengan (PL): X cm, Lingkar Paha (LPh): X cm, Panjang Terusan/Baju (PB): X cm';
     }
+
+    // if (selectedOption === 'atasan') {
+    //     detailSpan = 'Lingkar Leher (LL): X cm, Lingkar Dada (LD): X cm, Lebar Bahu (LB) : X cm, Lingkar Pinggang (LP): X cm, Panjang Lengan (PL): X cm, Panjang atasan/Baju (PB): X cm';
+    // } else if (selectedOption === 'bawahan') {
+    //     detailSpan = 'Lingkar Pinggang (LP): X cm, Lingkar Paha (LPh): X cm, Panjang bawahan/Baju (PB): X cm';
+    // } else if (selectedOption === 'terusan') {
+    //     detailSpan = 'Lingkar Leher (LL):X cm, Lingkar Dada (LD): X cm, Lebar Bahu (LB): X cm, Lingkar Pinggang (LP): X cm, Panjang Lengan (PL): X cm, Lingkar Paha (LPh): X cm, Panjang Terusan/Baju (PB): X cm';
+    // }
     });
-    
+
     const images = document.querySelectorAll('.zoomable-image');
     const zoomContainer = document.getElementById('zoom-container');
 

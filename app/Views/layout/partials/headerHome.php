@@ -26,7 +26,7 @@
                         </div>
                         <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10 dropdown-menu hidden" aria-labelledby="signInDropdown" role="menu">
                             <?php if (session()->get('role') === 'admin'): ?>
-                                <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" href="<?= base_url('dashboard') ?>" role="menuitem">Dashboard</a>
+                                <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" href="<?= base_url('dashboard') ?>" role="menuitem">Dashboard Admin</a>
                             <?php endif ?>
                             <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" href="<?= base_url('customer/profile') ?>" role="menuitem">Profile</a>
                             <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" href="javascript:void(0);" onclick="signOut()" role="menuitem">Keluar</a>

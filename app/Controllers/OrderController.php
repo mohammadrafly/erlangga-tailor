@@ -140,7 +140,7 @@ class OrderController extends BaseController
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $random_string = '';
         for ($i = 0; $i < $length; $i++) {
-            $random_string .= $characters[rand(0, strlen($characters) - 1)];
+            $random_string .= $characters[rand(0, strlen($characters) - 1)]; 
         }
         return $random_string;
     }

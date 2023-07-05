@@ -28,6 +28,66 @@
     .toggle-checkbox:checked + .toggle-label::before {
     transform: translateX(25%);
     }
+    .scrollable-checkbox-container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+.scrollable-checkbox-container label {
+  flex: 0 0 auto;
+  margin-right: 1rem;
+}
+
+/* Hide the default radio button */
+.scrollable-checkbox-container input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  background-color: #fff;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+/* Show the custom radio button when selected */
+.scrollable-checkbox-container input[type="radio"]:checked::before {
+  content: "";
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background-color: #4299e1;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+    .zoomable-image {
+  transition: transform 0.3s ease-in-out;
+}
+
+.zoomable-image:hover {
+  transform: scale(1.2);
+}
+
+.zoomed-image {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  max-width: 90%;
+  max-height: 90%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  object-fit: contain;
+}
 
 </style>
 <?= $this->endSection() ?>
@@ -84,6 +144,20 @@
                                     </div>
                                 </div>
                                 <div class="mt-6">
+                                    <div class="mb-2">
+                                    <div id="zoom-container"></div>
+                                    <label class="block font-medium text-gray-700 mt-4 mb-2" for="foto_kain"></label>
+                                        <div class="scrollable-checkbox-container">
+                                                <label  class="flex items-center border rounded-md px-4 py-2 hover:bg-gray-100 transition-colors duration-300">
+                                                    <div class="w-24 h-24 bg-gray-200 rounded-full overflow-hidden">
+                                                        <img src="<?=base_url('assets/img/ukuran.png') ?>" alt="" class="object-cover w-full h-full zoomable-image">
+                                                    </div>
+                                                    <span class="ml-3 font-medium">Info ukuran detail</span>
+                                                </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-6">
                                     <div class="flex items-center mb-4">
                                         <label class="mr-4 font-medium text-gray-700" for="switch_ukuran">Ukuran</label>
                                         <div class="relative inline-block w-10 align-middle select-none transition duration-200 ease-in">
@@ -131,7 +205,7 @@
                                     </div>
                                 </div>
                                 <button class="mt-4 bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg shadow-md transition-colors duration-300" type="submit">
-                                    Pesan
+                                Masukkan Keranjang
                                 </button>
                             </form>
                         </div>
@@ -154,6 +228,25 @@
     } else if (selectedOption === 'terusan') {
         ukuranTextarea.placeholder = 'Lingkar Leher (LL):X cm, Lingkar Dada (LD): X cm, Lebar Bahu (LB): X cm, Lingkar Pinggang (LP): X cm, Panjang Lengan (PL): X cm, Lingkar Paha (LPh): X cm, Panjang Terusan/Baju (PB): X cm';
     }
+    });
+
+    const images = document.querySelectorAll('.zoomable-image');
+    const zoomContainer = document.getElementById('zoom-container');
+
+    images.forEach((image) => {
+        image.addEventListener('click', () => {
+        const zoomedImg = document.createElement('img');
+        zoomedImg.src = image.src;
+        zoomedImg.classList.add('zoomed-image');
+
+        zoomContainer.appendChild(zoomedImg);
+        zoomContainer.style.display = 'flex';
+
+        zoomedImg.addEventListener('click', () => {
+            zoomContainer.style.display = 'none';
+            zoomedImg.remove();
+        });
+        });
     });
 
 

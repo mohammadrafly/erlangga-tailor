@@ -13,9 +13,9 @@
             <div class="max-w-md w-full">
                 <div class="text-center font-bold m-5 mb-7 flex justify-center">
                     <a href="<?= base_url('/') ?>" class="text-4xl text-white mb-2">ERLANGGA TAILOR</a>
-                    <span class="ml-5">
+                    <!-- <span class="ml-5">
                         <img src="<?= base_url('assets/img/logo.jpg') ?>" alt="logo.jpg" class="rounded-full w-12">
-                    </span>
+                    </span> -->
                 </div>
                 <?= $this->renderSection('content') ?>
                 <div class="mt-10 text-center">

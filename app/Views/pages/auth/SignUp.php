@@ -38,7 +38,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="alamat">
                                 Alamat
                             </label>
-                            <textarea class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 hover:bg-gray-200 hover:outline-gray-200 focus:ring focus:ring-blue-300 focus:outline-none" id="alamat" placeholder="Contoh: Utd Pmi Malang, Jl. Buring, Oro-oro Dowo, Kec. Klojen, Kota Malang, Jawa Timur 65119"></textarea>
+                            <textarea class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 hover:bg-gray-200 hover:outline-gray-200 focus:ring focus:ring-blue-300 focus:outline-none" id="alamat" placeholder="Contoh: Jl nang no 40, Kec. Patrang, Kota Jembar, Jawa Timur 68111"></textarea>
                         </div>
                         <div class="mb-6">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="password">

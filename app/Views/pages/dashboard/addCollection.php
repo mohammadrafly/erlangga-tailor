@@ -4,7 +4,7 @@
 
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Tambah Product</h6>
+    <h6 class="m-0 font-weight-bold text-primary">Collection Product</h6>
   </div>
   <div class="card-body">
     <form method="POST" action="<?= $content ? base_url('dashboard/collections/update/'.$content['id']) : base_url('dashboard/collections/')  ; ?>" enctype="multipart/form-data">

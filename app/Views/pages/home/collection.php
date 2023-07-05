@@ -28,7 +28,8 @@
               <?= $data['product'] ?>
             </a>
           </h3>
-          <p class="mt-1 text-sm text-gray-500"><?= $data['estimasi'] ?></p>
+          <p class="mt-1 text-sm text-gray-500">Range : <?= $data['harga'] ?></p>
+          <p class="mt-1 text-sm text-gray-500">Estimasi : <?= $data['estimasi'] ?></p>
         </div>
       </div>
     </div>  

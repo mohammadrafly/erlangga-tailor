@@ -38,9 +38,12 @@
                                                 <a href="<?= base_url('dashboard/collections/update/' . $data['id']) ?>" class="btn btn-primary btn-sm mr-2">
                                                     <i class="fas fa-edit"></i> Edit
                                                 </a>
-                                                <a href="<?= base_url('dashboard/collections/delete/' . $data['id']) ?>" class="btn btn-danger btn-sm">
+                                                <!--<a href="<?= base_url('dashboard/collections/delete/' . $data['id']) ?>" class="btn btn-danger btn-sm">
                                                     <i class="fas fa-trash"></i> Delete
-                                                </a>
+                                                </a> -->
+                                                <button onclick="deleteCollection(<?= $data['id'] ?>)" class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-trash"></i> Delete
+                                                </button>
                                             </td>
                                         </tr>
                                     <?php endforeach ?>
@@ -50,4 +53,35 @@
                         </div>
                     </div>
 
+<?= $this->endSection() ?>
+<?= $this->section('script') ?>
+<script>
+function deleteCollection(id) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: `${base_url}dashboard/collections/delete/${id}`,
+                type: 'GET',
+                dataType: 'JSON',
+                success: function (respond) {
+                    showAlert(respond.icon, respond.title, respond.text);
+                },
+                error: function (textStatus) {
+                    showAlert('error', textStatus, 'Telah terjadi error');
+                }
+            });
+        } else if (result.isDenied) {
+          Swal.fire('Changes are not saved', '', 'info')
+        }
+    })
+}
+</script>
 <?= $this->endSection() ?>

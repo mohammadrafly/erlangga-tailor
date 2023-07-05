@@ -108,4 +108,5 @@ class AuthController extends BaseController
             'text' => 'Logout berhasil.'
         ]);
     }
+    
 }

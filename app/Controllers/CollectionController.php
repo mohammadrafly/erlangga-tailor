@@ -118,6 +118,23 @@ class CollectionController extends BaseController
     {
         $model = new CollectionModel();
         $model->where('id', $id)->delete($id);
-        return redirect()->to('dashboard/collections')->with('success', 'Berhasil hapus collection');
+        return $this->response->setJSON([
+            'status' => TRUE,
+            'icon' => 'success',
+            'title' => 'Success',
+            'text' => 'data telah dihapus'
+        ]);
     }
+    
+    // public function delete($id = null)
+    // {
+    //     $model = new UserModel();
+    //     $model->where('id', $id)->delete($id);
+    //     return $this->response->setJSON([
+    //         'status' => TRUE,
+    //         'icon' => 'success',
+    //         'title' => 'Success',
+    //         'text' => 'User telah dihapus'
+    //     ]);
+    // }
 }

@@ -80,18 +80,25 @@
                             <h2 class="text-lg font-semibold text-gray-800 mb-4">Ukuran</h2>
                             <ul class="list-disc ml-4">
                                 <li> Terdapat 2 pilihan dalam mentukan ukuran yaitu ukuran umum ( ex :  S, M, L, etc), dan ukuran detail (ex :Lingkar Leher (L L), Lingkar Badan (L B), Lebar Punggung / Pundak (L P), etc).</li>
+                                <li> Harga pemesanan pakaian dengan ukuran S, M, L normal,</li>
+                                <li> penambahan Rp. 5000 untuk ukuran XL, dan XXL, </li>
+                                <li> penambahan Rp. 10.000 untuk unkuran >XXL.</li>
+                            </ul>
+                            </div>
+                            <div>
+                            <h2 class="text-lg font-semibold text-gray-800 mb-4">Bahan Khusus</h2>
+                            <ul class="list-disc ml-4">
+                                <li> Penambahan harga pada bahan kain khusus.</li>
+                                <li> Jenis Kain Satin: Kain satin cenderung licin dan mudah tergelincir saat dijahit. Penambahan Rp. 5000 untuk setiap meternya</li>
+                                <li> Jenis Kain Sutra: Kain sutra adalah kain yang halus dan mudah rusak. Penambahan Rp. 15000 untuk setiap meternya</li>
+                                <li> Jenis Kain Chiffon: Kain chiffon tipis, ringan, dan transparan. Penambahan Rp. 4000 untuk setiap meternya</li>
+                                <li> Jenis Kain Jeans: Kain jeans adalah kain yang cukup tebal . Penambahan Rp. 5000 untuk setiap meternya</li>
                             </ul>
                             </div>
                             <div>
                             <h2 class="text-lg font-semibold text-gray-800 mb-4">Pembatalan Pesanan</h2>
                             <ul class="list-disc ml-4">
                                 <li> Pesanan dapat dibatalkan selama belum mengirimkan bahan kain.</li>
-                            </ul>
-                            </div>
-                            <div>
-                            <h2 class="text-lg font-semibold text-gray-800 mb-4">Pemesanan Rombongan</h2>
-                            <ul class="list-disc ml-4">
-                                <li> Untuk pemesanan rombongan atau pemesanan dengan bahan kain tidak dari customer, tidak dapat dilakukkan dengan pemesanan online / web. Pemesanan dapat dilakukkan dengan menghubungi langsung pihak kami.</li>
                             </ul>
                             </div>
                             <div>
@@ -109,7 +116,13 @@
                             <div>
                             <h2 class="text-lg font-semibold text-gray-800 mb-4">Gratis Ongkir</h2>
                             <ul class="list-disc ml-4">
-                                <li> Gratis ongkir khusus wilayah jember / pesanan akan di antar langsung oleh pihak kami.</li>
+                                <li> Gratis ongkir khusus untuk pengiriman pesanan wilayah jember / pesanan akan di antar langsung oleh pihak kami.</li>
+                            </ul>
+                            </div>
+                            <div>
+                            <h2 class="text-lg font-semibold text-gray-800 mb-4">Pemesanan Rombongan</h2>
+                            <ul class="list-disc ml-4">
+                                <li> Untuk pemesanan rombongan atau pemesanan dengan bahan kain tidak dari customer, tidak dapat dilakukkan dengan pemesanan online / web. Pemesanan dapat dilakukkan dengan menghubungi langsung pihak kami.</li>
                             </ul>
                             </div>
                         </div>
@@ -172,6 +185,10 @@
                                     <div class="">
                                         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                                             <div class="mb-4">
+                                            <h2 class="text-lg font-semibold">Our Location : </h2>
+                                            <p ><?= $toko['alamat'] ?></p><br>
+                                            <h2 class="text-lg font-semibold">Cp: </h2>
+                                            <p ><?= $toko['nama_pemilik'] ?></p><br>
                                                 <label class="block text-gray-700 font-bold mb-2" for="message">
                                                     Message
                                                 </label>

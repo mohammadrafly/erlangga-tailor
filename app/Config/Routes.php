@@ -35,6 +35,8 @@ $routes->get('/', 'Home::index');
 $routes->group('auth', function($routes) {
     $routes->match(['POST', 'GET'], 'sign-in', 'AuthController::signIn');
     $routes->match(['POST', 'GET'], 'sign-up', 'AuthController::signUp');
+    $routes->match(['POST', 'GET'], 'forgot-password', 'AuthController::forgotPassword');
+    $routes->match(['POST', 'GET'], 'reset-password/(:any)/(:any)', 'AuthController::resetPassword/$1/$2');
 });
 
 $routes->group('dashboard', ['filter' => 'auth'], function ($routes){

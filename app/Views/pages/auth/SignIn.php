@@ -23,7 +23,7 @@
                             <input class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 hover:bg-gray-200 hover:outline-gray-200 focus:ring focus:ring-blue-300 focus:outline-none" id="password" type="password" placeholder="********">
                         </div>
                         <div class="flex items-left mb-5">
-                            <a class="inline-block align-baseline font-semibold text-sm text-gray-500 hover:text-gray-800" href="#">
+                            <a class="inline-block align-baseline font-semibold text-sm text-gray-500 hover:text-gray-800" href="<?= base_url('auth/forgot-password') ?>">
                                 Forgot Password?
                             </a>
                         </div>

@@ -157,27 +157,21 @@
     <section class="mt-20 mb-20">
         <div class="container mx-auto py-12">
             <div class="flex flex-wrap -mx-4">
-                <div class="w-full md:w-1/2 lg:w-1/4 px-4">
+                <div class="w-full md:w-1/3  px-4">
                     <div class="bg-purple-500 text-white rounded-lg p-6 shadow-md">
                         <h3 class="text-xl font-semibold">Back to School</h3>
                         <p class="mt-4">Dapatkan voucer pelajar Indonesia sebesar 10%, untuk pemesanan jasa menjahit seragam sekolah. Berlaku hanya pada setiap pemesanan 20 mei - 20 juni.</p>
                     </div>
                 </div>
-                <div class="w-full md:w-1/2 lg:w-1/4 px-4">
+                <div class="w-full md:w-1/3  px-4">
                     <div class="bg-blue-500 text-white rounded-lg p-6 shadow-md">
                         <h3 class="text-xl font-semibold">Ramadhan Event</h3>
                         <p class="mt-4">Promo menjelah ramdhan potongan Rp 10k untuk setiap pemesanan. Berlaku hanya pada setiap pemesanan 20 sya'ban - 5 ramadhan.</p>
                     </div>
                 </div>
-                <div class="w-full md:w-1/2 lg:w-1/4 px-4">
+                <div class="w-full md:w-1/3 px-4">
                     <div class="bg-green-500 text-white rounded-lg p-6 shadow-md">
                         <h3 class="text-xl font-semibold">Tahun Baru</h3>
-                        <p class="mt-4">Event tahun baru dapat potongan sebesar Rp 20k, untuk pemesanan jasa menjahit kemeja. Berlaku hanya pada setiap pemesanan 1 januari.</p>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/2 lg:w-1/4 px-4">
-                    <div class="bg-yellow-500 text-white rounded-lg p-6 shadow-md">
-                        <h3 class="text-xl font-semibold">Event 4</h3>
                         <p class="mt-4">Event tahun baru dapat potongan sebesar Rp 20k, untuk pemesanan jasa menjahit kemeja. Berlaku hanya pada setiap pemesanan 1 januari.</p>
                     </div>
                 </div>

@@ -157,7 +157,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <!-- <div class="mt-6">
+                                <div class="mt-6">
                                     <div class="mb-2">
                                     <div id="zoom-container"></div>
                                     <label class="block font-medium text-gray-700 mt-4 mb-2" for="Info"></label>
@@ -170,13 +170,13 @@
                                                 </label>
                                         </div>
                                     </div>
-                                </div> -->
-                                <div class="mt-6">
+                                </div>
+                                <!-- <div class="mt-6">
                                     <div class="mb-2">
                                         <label class="block font-medium text-gray-700 mt-4 mb-2" for="info_ukuran">Info Ukuran Detail</label>
                                         <span id="detail" type="text" name="detail">Masukkan : Lingkar dada:X cm, Lingkar pinggang: X cm, Lingkar pinggul: X cm, Panjang atasan: X cm</span>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="mt-6">
                                     <div class="flex items-center mb-4">
                                         <label class="mr-4 font-medium text-gray-700" for="switch_ukuran">Ukuran</label>

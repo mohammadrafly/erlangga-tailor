@@ -6,9 +6,10 @@
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Data <?= $title ?></h6>
                         </div>
-                        <a href="<?= base_url('dashboard/collections/add') ?>" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                         Tambah Collection
-                        </a>
+                        </button>
+                        <?= $this->include('pages/partials/modalCollection') ?>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -35,12 +36,9 @@
                                             <td><?= $data['created_at'] ?></td>
                                             <td><?= $data['updated_at'] ?></td>
                                             <td>
-                                                <a href="<?= base_url('dashboard/collections/update/' . $data['id']) ?>" class="btn btn-primary btn-sm mr-2">
+                                                <button onclick="editCollection(<?= $data['id'] ?>)" class="btn btn-primary btn-sm">
                                                     <i class="fas fa-edit"></i> Edit
-                                                </a>
-                                                <!--<a href="<?= base_url('dashboard/collections/delete/' . $data['id']) ?>" class="btn btn-danger btn-sm">
-                                                    <i class="fas fa-trash"></i> Delete
-                                                </a> -->
+                                                </button>
                                                 <button onclick="deleteCollection(<?= $data['id'] ?>)" class="btn btn-danger btn-sm">
                                                     <i class="fas fa-trash"></i> Delete
                                                 </button>
@@ -56,6 +54,63 @@
 <?= $this->endSection() ?>
 <?= $this->section('script') ?>
 <script>
+function saveCollection() {
+  const id = $('#id').val();
+  const url = id ? `${base_url}dashboard/collections/update/${id}` : `${base_url}dashboard/collections`;
+
+  // Create a new FormData object
+  const formData = new FormData($('#form')[0]);
+
+  $.ajax({
+    url,
+    type: 'POST',
+    data: formData, // Use the FormData object for data
+    dataType: 'JSON',
+    contentType: false, // Set content type to false for FormData
+    processData: false, // Set processData to false for FormData
+    success: (respond) => {
+      if (respond.status) {
+        showAlert(respond.icon, respond.title, respond.text)
+      } else {
+        showAlert(respond.icon, respond.title, respond.text);
+      }
+    },
+    error: (error) => {
+      showAlert('error', error, 'Telah terjadi error, silahkan hubungi admin.');
+    },
+  });
+}
+
+function editCollection(id) {
+    $('#form')[0].reset(); 
+    $.ajax({
+        url : `${base_url}dashboard/collections/update/${id}`,
+        type: 'GET',
+        dataType: 'JSON',
+        success: function(respond)
+        {
+            $('[name="id"]').val(respond.data.id);
+            $('[name="ketegori"]').val(respond.data.ketegori);
+            $('[name="product"]').val(respond.data.product);
+            $('[name="harga"]').val(respond.data.harga);
+            $('[name="estimasi"]').val(respond.data.estimasi);
+            $('[name="img"]').val(respond.data.img);
+            $('#myModal').modal('show');
+            $('.modal-title').text('Edit Collections'); 
+
+            // Add event listener to modal close event
+            $('#myModal').on('hidden.bs.modal', function () {
+                $('#form')[0].reset(); // Reset the form
+                location.reload();
+            });
+        },
+        error: function (textStatus)
+        {
+            alert(textStatus);
+        }
+    });
+}
+
 function deleteCollection(id) {
     Swal.fire({
         title: 'Are you sure?',

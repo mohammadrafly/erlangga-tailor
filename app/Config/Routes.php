@@ -62,7 +62,6 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes){
     //collections
     $routes->group('collections', function($routes) {
         $routes->match(['POST', 'GET'], '/', 'CollectionController::index');
-        $routes->get('add', 'CollectionController::add');
         $routes->match(['POST', 'GET'], 'update/(:num)', 'CollectionController::update/$1');
         $routes->get('delete/(:num)', 'CollectionController::delete/$1');
     });

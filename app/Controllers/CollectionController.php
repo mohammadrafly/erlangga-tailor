@@ -23,19 +23,6 @@ class CollectionController extends BaseController
         return view('pages/home/promo');
     }
 
-    public function add()
-    {
-        $modelOrder = new OrderModel();
-        $newOrderCount = $modelOrder->where('status_track', 'new')->countAllResults();
-        $hasNewData = ($newOrderCount > 0);
-        $data = [
-            'title' => 'Tambah Collections',
-            'content' => '',
-            'hasNewData' => $hasNewData,
-        ];
-        return view('pages/dashboard/addCollection', $data);
-    }
-
     public function index()
     {
         $model = new CollectionModel();
@@ -66,7 +53,27 @@ class CollectionController extends BaseController
             ];
 
             $model->insert($data);
-            return redirect()->to('dashboard/collections')->with('success', 'Berhasil simpan collection');
+            return $this->response->setJSON([
+                'status' => TRUE,
+                'icon' => 'success',
+                'title' => 'Success',
+                'text' => 'data telah ditambahkan'
+            ]);
+        } else {
+            $data = [
+                'kategori' => $this->request->getVar('kategori'),
+                'product' => $this->request->getVar('product'),
+                'harga' => $this->request->getVar('harga'),
+                'estimasi' => $this->request->getVar('estimasi'),
+            ];
+
+            $model->insert($data);
+            return $this->response->setJSON([
+                'status' => TRUE,
+                'icon' => 'success',
+                'title' => 'Success',
+                'text' => 'data telah ditambahkan'
+            ]);
         }
     }
 
@@ -74,15 +81,9 @@ class CollectionController extends BaseController
     {
         $model = new CollectionModel();
         if ($this->request->getMethod(true) !== 'POST') {
-            $modelOrder = new OrderModel();
-            $newOrderCount = $modelOrder->where('status_track', 'new')->countAllResults();
-            $hasNewData = ($newOrderCount > 0);
-            $data = [
-                'content' => $model->find($id),
-                'title' => 'Update Collection',
-                'hasNewData' => $hasNewData,
-            ];
-            return view('pages/dashboard/addCollection', $data);
+            return $this->response->setJSON([
+               'data' => $model->find($id)
+            ]);
         }
 
         $img = $this->request->getFile('img');
@@ -100,7 +101,12 @@ class CollectionController extends BaseController
             ];
 
             $model->update($id,$data);
-            return redirect()->to('dashboard/collections')->with('success', 'Berhasil simpan collection');
+            return $this->response->setJSON([
+                'status' => TRUE,
+                'icon' => 'success',
+                'title' => 'Success',
+                'text' => 'berhasil simpan data'
+            ]);
         } else {
             $data = [
                 'kategori' => $this->request->getVar('kategori'),
@@ -110,7 +116,12 @@ class CollectionController extends BaseController
             ];
 
             $model->update($id,$data);
-            return redirect()->to('dashboard/collections')->with('success', 'Berhasil simpan collection');
+            return $this->response->setJSON([
+                'status' => TRUE,
+                'icon' => 'success',
+                'title' => 'Success',
+                'text' => 'berhasil simpan data'
+            ]);
         }
     }
 
@@ -125,16 +136,4 @@ class CollectionController extends BaseController
             'text' => 'data telah dihapus'
         ]);
     }
-    
-    // public function delete($id = null)
-    // {
-    //     $model = new UserModel();
-    //     $model->where('id', $id)->delete($id);
-    //     return $this->response->setJSON([
-    //         'status' => TRUE,
-    //         'icon' => 'success',
-    //         'title' => 'Success',
-    //         'text' => 'User telah dihapus'
-    //     ]);
-    // }
 }

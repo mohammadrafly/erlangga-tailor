@@ -9,6 +9,8 @@
                             </div>
                         <?php endif; ?>
                     <p class="mb-6 font-thin text-center">Masuk menggunakan akun anda.</p>
+                    <h3 class=" text-center">Username admin = admin</h3>
+                    <h3 class="mb-6 text-center">password admin = admin</h3>
                     <form id="SignIn">
                         <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
